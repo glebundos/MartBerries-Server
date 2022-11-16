@@ -26,4 +26,8 @@
     <ProjectReference Include="..\MartBerries-Server.Infrastructure\MartBerries-Server.Infrastructure.csproj" />
   </ItemGroup>
 
+	<Target Name="PrePublishTarget" AfterTargets="Publish">
+		<Exec Command="dotnet ef database update" />
+	</Target>
+
 </Project>
