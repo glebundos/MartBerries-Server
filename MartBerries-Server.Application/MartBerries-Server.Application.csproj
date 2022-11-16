@@ -9,8 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Handlers\CommandHandlers\" />
-    <Folder Include="Mappers\" />
     <Folder Include="Responses\" />
   </ItemGroup>
 

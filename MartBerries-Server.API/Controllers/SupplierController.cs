@@ -1,4 +1,5 @@
 ﻿using MartBerries_Server.API.Controllers.Base;
+using MartBerries_Server.Application.Commands;
 using MartBerries_Server.Application.Queries;
 using MartBerries_Server.Core.Entities;
 using MediatR;
@@ -17,6 +18,12 @@ namespace MartBerries_Server.API.Controllers
         public async Task<ActionResult<List<Supplier>>> Get()
         {
             return Single(await QueryAsync(new GetAllSupplierQuery()));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Supplier>> Create([FromBody] CreateSupplierCommand command)
+        {
+            return await CommandAsync(command);
         }
     }
 }

@@ -10,7 +10,10 @@ namespace MartBerries_Server.Infrastructure.Data
 {
     public class ServerContext : DbContext
     {
-        public ServerContext(DbContextOptions<ServerContext> options) : base(options) { }
+        public ServerContext(DbContextOptions<ServerContext> options) : base(options) 
+        {
+            Database.EnsureCreated();
+        }
 
         public virtual DbSet<MoneyTransfer> MoneyTransfers { get; set; } = default!;
         public virtual DbSet<Order> Orders { get; set; } = default!;
