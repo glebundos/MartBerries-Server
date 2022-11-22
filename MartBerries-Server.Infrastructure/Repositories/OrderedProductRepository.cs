@@ -15,5 +15,12 @@ namespace MartBerries_Server.Infrastructure.Repositories
         public OrderedProductRepository(ServerContext serverContext) : base(serverContext)
         {
         }
+
+        public async Task<List<OrderedProduct>> AddManyAsync(List<OrderedProduct> orderedProducts)
+        {
+            await _serverContext.Set<OrderedProduct>().AddRangeAsync(orderedProducts);
+            await _serverContext.SaveChangesAsync();
+            return orderedProducts;
+        }
     }
 }

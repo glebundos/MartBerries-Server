@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartBerries-Server.API", "MartBerries-Server.API\MartBerries-Server.API.csproj", "{F13B8140-CE5D-437D-85B1-B751F4929E8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartBerries-Server.API", "MartBerries-Server.API\MartBerries-Server.API.csproj", "{F13B8140-CE5D-437D-85B1-B751F4929E8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartBerries-Server.Application", "MartBerries-Server.Application\MartBerries-Server.Application.csproj", "{6FEFE753-2EA5-4EE6-B5B0-8B0C8A1A7E06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartBerries-Server.Application", "MartBerries-Server.Application\MartBerries-Server.Application.csproj", "{6FEFE753-2EA5-4EE6-B5B0-8B0C8A1A7E06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartBerries-Server.Core", "MartBerries-Server.Core\MartBerries-Server.Core.csproj", "{AB9C5025-A681-4411-B0C4-B69D64C061AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartBerries-Server.Core", "MartBerries-Server.Core\MartBerries-Server.Core.csproj", "{AB9C5025-A681-4411-B0C4-B69D64C061AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartBerries-Server.Infrastructure", "MartBerries-Server.Infrastructure\MartBerries-Server.Infrastructure.csproj", "{B5565A83-D237-4F5F-8F5A-F7D4A2248AAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartBerries-Server.Infrastructure", "MartBerries-Server.Infrastructure\MartBerries-Server.Infrastructure.csproj", "{B5565A83-D237-4F5F-8F5A-F7D4A2248AAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
