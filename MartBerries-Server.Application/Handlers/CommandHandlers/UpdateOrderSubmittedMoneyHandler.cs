@@ -37,7 +37,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             var moneyTransfer = new MoneyTransfer
             {
                 TransferDateTime= DateTime.UtcNow,
-                TransactionTypeId = 0, // TransactionTypes.Client
+                TransactionTypeId = 1, // TransactionTypes.Income
                 Amount = request.SubmittedMoney
             };
 
