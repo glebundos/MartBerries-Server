@@ -38,5 +38,23 @@ namespace MartBerries_Server.API.Controllers
         {
             return await CommandAsync(command);
         }
+
+        [HttpPut]
+        public async Task<ActionResult<Order>> UpdateStatus([FromBody] UpdateOrderStatusCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("requestedMoney")]
+        public async Task<ActionResult<Order>> UpdateStatus([FromBody] UpdateOrderRequestedMoneyCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
+        [HttpPut("submittedMoney")]
+        public async Task<ActionResult<Order>> UpdateStatus([FromBody] UpdateOrderSubmittedMoneyCommand command)
+        {
+            return await CommandAsync(command);
+        }
     }
 }
