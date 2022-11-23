@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MartBerries_Server.Application.Commands
+namespace MartBerries_Server.Application.Queries
 {
-    public class CreateSupplierCommand : IRequest<Guid>
+    public class GetAllSupplierProductQuery : IRequest<List<SupplierProduct>>
     {
-        public string Name { get; set; }
+
     }
 }

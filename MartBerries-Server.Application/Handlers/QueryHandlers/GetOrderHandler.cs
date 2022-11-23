@@ -18,7 +18,15 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
 
         public async Task<Order> Handle(GetOrderQuery request, CancellationToken cancellationToken)
         {
-            return await _orderRepo.GetByIdAsync(request.Id);
+            try 
+            {
+                var order = await _orderRepo.GetByIdAsync(request.Id);
+                return order;
+            }
+            catch
+            {
+                return null!;
+            }
         }
     }
 }

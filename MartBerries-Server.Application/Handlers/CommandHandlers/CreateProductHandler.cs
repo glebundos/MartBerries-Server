@@ -20,6 +20,12 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
         public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var productEntity = ProductMapper.Mapper.Map<Product>(request);
+
+            if (productEntity == null)
+            {
+                return Guid.Empty;
+            }
+
             return (await _productRepo.AddAsync(productEntity)).Id;
         }
     }

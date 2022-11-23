@@ -17,7 +17,7 @@ namespace MartBerries_Server.Infrastructure.Repositories
         {
         }
 
-        public async Task<List<Order>> GetByStatusIdAsync(int statusId)
+        public async Task<IReadOnlyList<Order>> GetByStatusIdAsync(int statusId)
         {
             return await _serverContext.Set<Order>().Where(x => x.OrderStatusId == statusId).ToListAsync();
         }

@@ -18,7 +18,13 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
 
         public async Task<List<Product>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
         {
-            return (List<Product>)await _productRepo.GetAllAsync();
+            var products = (List<Product>)await _productRepo.GetAllAsync();
+            if (products == null || products.Count == 0)
+            {
+                return null!;
+            }
+
+            return products;
         }
     }
 }

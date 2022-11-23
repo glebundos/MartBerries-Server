@@ -12,8 +12,6 @@ namespace MartBerries_Server.Core.Entities
 
         public string Name { get; set; }
 
-        public Guid SupplierId { get; set; }
-
         public decimal Price { get; set; }
 
         public int Amount { get; set; }
@@ -22,7 +20,5 @@ namespace MartBerries_Server.Core.Entities
         public virtual ICollection<OrderedProduct> Orders { get; set; }
 
         public virtual ICollection<SupplierProduct> Suppliers { get; set; }
-
-        public virtual Supplier Supplier { get; set; }
     }
 }

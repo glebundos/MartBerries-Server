@@ -23,10 +23,20 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             var statusId = request.StatusID;
             if (statusId == -1)
             {
-                return (List<Order>)await _orderRepo.GetAllAsync();
+                var orders = (List<Order>)await _orderRepo.GetAllAsync();
+                if (orders == null || orders.Count == 0)
+                {
+                    return null!;
+                } 
             }
 
-            return (List<Order>)await _orderRepo.GetByStatusIdAsync(statusId);
+            var ordersByStatusId = (List<Order>)await _orderRepo.GetByStatusIdAsync(statusId);
+            if (ordersByStatusId == null || ordersByStatusId.Count == 0)
+            {
+                return null!;
+            }
+
+            return ordersByStatusId;
         }
     }
 }

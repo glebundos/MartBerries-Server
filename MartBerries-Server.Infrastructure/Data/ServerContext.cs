@@ -25,8 +25,6 @@ namespace MartBerries_Server.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>()
-                .HasOne(x => x.Supplier);
             modelBuilder.Entity<ProductTransfer>()
                 .HasOne(x => x.Product);
             modelBuilder.Entity<OrderedProduct>()

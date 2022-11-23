@@ -11,16 +11,21 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Handlers.CommandHandlers
 {
-    internal class CreateSupplierHandler : IRequestHandler<CreateSupplierCommand, Supplier>
+    internal class CreateSupplierHandler : IRequestHandler<CreateSupplierCommand, Guid>
     {
         private readonly ISupplierRepository _supplierRepository;
 
         public CreateSupplierHandler(ISupplierRepository supplierRepository) => _supplierRepository = supplierRepository;
 
-        public async Task<Supplier> Handle(CreateSupplierCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateSupplierCommand request, CancellationToken cancellationToken)
         {
             var supplierEntity = SupplierMapper.Mapper.Map<Supplier>(request);
-            return await _supplierRepository.AddAsync(supplierEntity);
+            if (supplierEntity == null)
+            {
+                return Guid.Empty;
+            }
+
+            return (await _supplierRepository.AddAsync(supplierEntity)).Id;
         }
     }
 }

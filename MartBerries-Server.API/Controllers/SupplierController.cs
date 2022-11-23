@@ -27,7 +27,7 @@ namespace MartBerries_Server.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Supplier>> Create([FromBody] CreateSupplierCommand command)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateSupplierCommand command)
         {
             return await CommandAsync(command);
         }

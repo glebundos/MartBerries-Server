@@ -27,6 +27,10 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
         {
             var orderedProducts = OrderedProductMapper.Mapper.Map<List<OrderedProduct>>(request.OrderedProducts);
             var orderEntity = OrderMapper.Mapper.Map<Order>(request);
+            if (orderEntity == null)
+            {
+                return Guid.Empty;
+            }
 
             var createdId = (await _orderRepo.AddAsync(orderEntity)).Id;
 

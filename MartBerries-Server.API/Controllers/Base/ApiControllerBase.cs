@@ -22,6 +22,11 @@ namespace MartBerries_Server.API.Controllers.Base
 
         protected ActionResult<T> Single<T>(T data)
         {
+            if (data == null)
+            {
+                return NotFound(data);
+            }
+
             return Ok(data);
         }
 
