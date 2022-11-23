@@ -33,8 +33,8 @@ namespace MartBerries_Server.Core.Entities
 
         public enum TransactionTypes
         {
-            Income,
-            Expense
+            Expense,
+            Income
         }
     }
 }

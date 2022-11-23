@@ -47,6 +47,12 @@ namespace MartBerries_Server.Infrastructure.Data
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            configurationBuilder.Properties<decimal>()
+                .HavePrecision(18, 6);
+        }
+
         public virtual void SetModified(object entity)
         {
             Entry(entity).State = EntityState.Modified;
