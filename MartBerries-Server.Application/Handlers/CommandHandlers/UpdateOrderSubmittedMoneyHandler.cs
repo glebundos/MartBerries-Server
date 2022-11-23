@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MartBerries_Server.Core.Entities.MoneyTransfer;
 
 namespace MartBerries_Server.Application.Handlers.CommandHandlers
 {
@@ -14,7 +15,13 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
     {
         private readonly IOrderRepository _orderRepo;
 
-        public UpdateOrderSubmittedMoneyHandler(IOrderRepository orderRepo) => _orderRepo = orderRepo;
+        private readonly IMoneyTransferRepository _moneyTransferRepo;
+
+        public UpdateOrderSubmittedMoneyHandler(IOrderRepository orderRepo, IMoneyTransferRepository moneyTransferRepository)
+        {
+            _orderRepo = orderRepo;
+            _moneyTransferRepo = moneyTransferRepository;
+        }
 
         public async Task<Order> Handle(UpdateOrderSubmittedMoneyCommand request, CancellationToken cancellationToken)
         {
@@ -27,6 +34,15 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             oldOrder.SubmittedMoney = request.SubmittedMoney;
             var newOrder = await _orderRepo.UpdateAsync(oldOrder);
+            var moneyTransfer = new MoneyTransfer
+            {
+                TransferDateTime= DateTime.UtcNow,
+                TransactionTypeId = 0, // TransactionTypes.Client
+                Amount = request.SubmittedMoney
+            };
+
+            await _moneyTransferRepo.AddAsync(moneyTransfer);
+
             return newOrder;
         }
     }

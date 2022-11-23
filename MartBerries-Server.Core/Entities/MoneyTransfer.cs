@@ -29,12 +29,12 @@ namespace MartBerries_Server.Core.Entities
         [EnumDataType(typeof(TransactionTypes))]
         public TransactionTypes TransactionType { get; set; }
 
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public enum TransactionTypes
         {
-            Aboba,
-            Amogus
+            Client,
+            Supplier
         }
     }
 }
