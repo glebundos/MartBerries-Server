@@ -39,7 +39,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                 orderedProducts[i].OrderId = createdId;
             }
 
-            await _orderedProductRepo.AddManyAsync(orderedProducts);
+            await _orderedProductRepo.AddRangeAsync(orderedProducts);
 
             return createdId;
         }

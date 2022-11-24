@@ -35,8 +35,8 @@ namespace MartBerries_Server.Core.Entities
 
         public enum TransferTypes
         {
-            Aboba,
-            Amogus
+            Export,
+            Import
         }
 
         // Navigation property

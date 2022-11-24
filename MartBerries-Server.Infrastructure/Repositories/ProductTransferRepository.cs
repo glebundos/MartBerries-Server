@@ -15,5 +15,12 @@ namespace MartBerries_Server.Infrastructure.Repositories
         public ProductTransferRepository(ServerContext serverContext) : base(serverContext)
         {
         }
+
+        public async Task<List<ProductTransfer>> AddRangeAsync(List<ProductTransfer> productTransfers)
+        {
+            await _serverContext.Set<ProductTransfer>().AddRangeAsync(productTransfers);
+            await _serverContext.SaveChangesAsync();
+            return productTransfers;
+        }
     }
 }

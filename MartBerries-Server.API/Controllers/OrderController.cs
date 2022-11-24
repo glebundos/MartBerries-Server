@@ -56,5 +56,11 @@ namespace MartBerries_Server.API.Controllers
         {
             return await CommandAsync(command);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<Guid>> Delete([FromBody] DeleteOrderCommand command)
+        {
+            return await CommandAsync(command);
+        }
     }
 }

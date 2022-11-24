@@ -10,6 +10,6 @@ namespace MartBerries_Server.Core.Repositories
 {
     public interface IOrderedProductRepository : IRepository<OrderedProduct>
     {
-        public Task<List<OrderedProduct>> AddManyAsync(List<OrderedProduct> orderedProducts);
+        public Task<List<OrderedProduct>> AddRangeAsync(List<OrderedProduct> orderedProducts);
     }
 }

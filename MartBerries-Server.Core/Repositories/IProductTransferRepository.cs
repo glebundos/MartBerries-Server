@@ -10,5 +10,6 @@ namespace MartBerries_Server.Core.Repositories
 {
     public interface IProductTransferRepository : IRepository<ProductTransfer>
     {
+        public Task<List<ProductTransfer>> AddRangeAsync(List<ProductTransfer> productTransfers);
     }
 }
