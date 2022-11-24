@@ -19,7 +19,10 @@ namespace MartBerries_Server.Infrastructure.Repositories
 
         public async Task<IReadOnlyList<Order>> GetByStatusIdAsync(int statusId)
         {
-            return await _serverContext.Set<Order>().Where(x => x.OrderStatusId == statusId).ToListAsync();
+            return await _serverContext.Set<Order>()
+                .Include(x => x.Products)
+                .ThenInclude(x => x.Product)
+                .Where(x => x.OrderStatusId == statusId).ToListAsync();
         }
 
         public override async Task<IReadOnlyList<Order>> GetAllAsync()
@@ -27,6 +30,15 @@ namespace MartBerries_Server.Infrastructure.Repositories
             return await _serverContext.Set<Order>()
                 .Include(x => x.Products)
                 .ThenInclude(x => x.Product)
+                .ToListAsync();
+        }
+
+        public override async Task<Order> GetByIdAsync(Guid id)
+        {
+            return await _serverContext.Set<Order>()
+                .Include(x => x.Products)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == id)
                 .ToListAsync();
         }
     }

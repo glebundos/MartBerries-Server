@@ -2,6 +2,7 @@
 using MartBerries_Server.Core.Repositories;
 using MartBerries_Server.Infrastructure.Data;
 using MartBerries_Server.Infrastructure.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,20 @@ namespace MartBerries_Server.Infrastructure.Repositories
             await _serverContext.Set<ProductTransfer>().AddRangeAsync(productTransfers);
             await _serverContext.SaveChangesAsync();
             return productTransfers;
+        }
+
+        public override async Task<ProductTransfer> GetByIdAsync(Guid id)
+        {
+            return await _serverContext.Set<ProductTransfer>()
+                .Include(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public override async Task<IReadOnlyList<ProductTransfer>> GetAllAsync()
+        {
+            return await _serverContext.Set<ProductTransfer>()
+                .Include(x => x.Product)
+                .ToListAsync();
         }
     }
 }

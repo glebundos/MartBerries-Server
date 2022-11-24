@@ -2,6 +2,7 @@
 using MartBerries_Server.Core.Repositories;
 using MartBerries_Server.Infrastructure.Data;
 using MartBerries_Server.Infrastructure.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,14 @@ namespace MartBerries_Server.Infrastructure.Repositories
     {
         public SupplierProductRepository(ServerContext serverContext) : base(serverContext)
         {
+        }
+
+        public override async Task<IReadOnlyList<SupplierProduct>> GetAllAsync()
+        {
+            return await _serverContext.Set<SupplierProduct>()
+                .Include(x => x.Product)
+                .Include(x => x.Supplier)
+                .ToListAsync();
         }
     }
 }
