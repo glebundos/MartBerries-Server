@@ -23,7 +23,8 @@ namespace MartBerries_Server.API
             });
 
             services.AddEndpointsApiExplorer();
-            services.AddDbContext<ServerContext>(m => m.UseSqlServer(builder.Configuration.GetConnectionString("MartBerries.Data")));
+            var connectionString = builder.Configuration.GetConnectionString("MartBerries.MySql");
+            services.AddDbContext<ServerContext>(m => m.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {

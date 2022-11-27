@@ -38,8 +38,7 @@ namespace MartBerries_Server.Infrastructure.Repositories
             return await _serverContext.Set<Order>()
                 .Include(x => x.Products)
                 .ThenInclude(x => x.Product)
-                .FirstOrDefaultAsync(x => x.Id == id)
-                .ToListAsync();
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
