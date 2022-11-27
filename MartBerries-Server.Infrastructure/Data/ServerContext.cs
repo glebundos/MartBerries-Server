@@ -12,7 +12,7 @@ namespace MartBerries_Server.Infrastructure.Data
     {
         public ServerContext(DbContextOptions<ServerContext> options) : base(options) 
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         public virtual DbSet<MoneyTransfer> MoneyTransfers { get; set; } = default!;
