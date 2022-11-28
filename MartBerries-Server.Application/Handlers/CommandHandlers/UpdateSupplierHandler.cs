@@ -26,6 +26,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             }
 
             oldSupplier.Name = request.Name;
+
             var newSupplier = await _supplierRepo.UpdateAsync(oldSupplier);
             return newSupplier;
         }
