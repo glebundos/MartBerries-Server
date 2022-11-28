@@ -25,5 +25,17 @@ namespace MartBerries_Server.API.Controllers
         {
             return await CommandAsync(command);
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<Guid>> Delete([FromBody] DeleteSupplierProductCommand command) 
+        {
+            return await CommandAsync(command); 
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<SupplierProduct>> Update([FromBody] UpdateSupplierProductCommand command)
+        {
+            return await CommandAsync(command);
+        }
     }
 }
