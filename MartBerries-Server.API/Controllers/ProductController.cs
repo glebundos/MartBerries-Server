@@ -23,7 +23,7 @@ namespace MartBerries_Server.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Product>>> Get()
         {
-            return Single(await QueryAsync(new GetAllProductQuery()));
+            return await QueryAsync(new GetAllProductQuery());
         }
 
         [HttpDelete]

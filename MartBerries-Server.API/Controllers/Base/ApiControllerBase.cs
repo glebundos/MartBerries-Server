@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace MartBerries_Server.API.Controllers.Base
 {
@@ -15,24 +16,28 @@ namespace MartBerries_Server.API.Controllers.Base
             _mediator = mediator ?? throw new ArgumentNullException();
         }
 
-        protected async Task<TResult> QueryAsync<TResult>(IRequest<TResult> query)
+        protected async Task<ActionResult<TResult>> QueryAsync<TResult>(IRequest<TResult> query)
         {
-            return await _mediator.Send(query);
-        }
-
-        protected ActionResult<T> Single<T>(T data)
-        {
-            if (data == null)
+            try
             {
-                return NotFound(data);
+                return Ok(await _mediator.Send(query));
             }
-
-            return Ok(data);
+            catch
+            {
+                return NotFound();
+            }
         }
 
-        protected async Task<TResult> CommandAsync<TResult>(IRequest<TResult> command)
+        protected async Task<ActionResult<TResult>> CommandAsync<TResult>(IRequest<TResult> command)
         {
-            return await _mediator.Send(command);
+            try
+            {
+                return Ok(await _mediator.Send(command));
+            }
+            catch
+            {
+                return NotFound();
+            }
         }
     }
 }

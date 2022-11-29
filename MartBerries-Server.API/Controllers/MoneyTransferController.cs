@@ -16,7 +16,7 @@ namespace MartBerries_Server.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<MoneyTransfer>>> Get()
         {
-            return Single(await QueryAsync(new GetAllMoneyTransferQuery()));
+            return await QueryAsync(new GetAllMoneyTransferQuery());
         }
     }
 }

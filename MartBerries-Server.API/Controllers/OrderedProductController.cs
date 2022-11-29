@@ -16,7 +16,7 @@ namespace MartBerries_Server.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<OrderedProduct>>> Get()
         {
-            return Single(await QueryAsync(new GetAllOrderedProductQuery()));
+            return await QueryAsync(new GetAllOrderedProductQuery());
         }
     }
 }

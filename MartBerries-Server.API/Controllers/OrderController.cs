@@ -17,19 +17,19 @@ namespace MartBerries_Server.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Order>>> Get()
         {
-            return Single(await QueryAsync(new GetOrderListQuery()));
+            return await QueryAsync(new GetOrderListQuery());
         }
 
         [HttpGet("{id:Guid}")]
         public async Task<ActionResult<Order>> Get(Guid id)
         {
-            return Single(await QueryAsync(new GetOrderQuery(id)));
+            return await QueryAsync(new GetOrderQuery(id));
         }
 
         [HttpGet("{statusId:int}")]
         public async Task<ActionResult<List<Order>>> GetByStatusId(int statusId)
         {
-            return Single(await QueryAsync(new GetOrderListQuery(statusId)));
+            return await QueryAsync(new GetOrderListQuery(statusId));
         }
 
         [HttpPost]
