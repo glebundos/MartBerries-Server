@@ -19,10 +19,6 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         public async Task<List<ProductTransfer>> Handle(GetAllProductTransferQuery request, CancellationToken cancellationToken)
         {
             var transferProducts = (List<ProductTransfer>)await _productTransferRepo.GetAllAsync();
-            if (transferProducts == null || transferProducts.Count == 0)
-            {
-                return null!;
-            }
 
             return transferProducts;
         }

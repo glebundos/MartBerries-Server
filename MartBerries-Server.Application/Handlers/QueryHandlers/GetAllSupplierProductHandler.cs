@@ -19,10 +19,6 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         public async Task<List<SupplierProduct>> Handle(GetAllSupplierProductQuery request, CancellationToken cancellationToken)
         {
             var supplierProducts = (List<SupplierProduct>)await _supplierProductRepo.GetAllAsync();
-            if (supplierProducts == null || supplierProducts.Count == 0)
-            {
-                return null!;
-            }
 
             return supplierProducts;
         }

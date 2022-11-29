@@ -24,17 +24,9 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             if (statusId == -1)
             {
                 var orders = (List<Order>)await _orderRepo.GetAllAsync();
-                if (orders == null || orders.Count == 0)
-                {
-                    return null!;
-                } 
             }
 
             var ordersByStatusId = (List<Order>)await _orderRepo.GetByStatusIdAsync(statusId);
-            if (ordersByStatusId == null || ordersByStatusId.Count == 0)
-            {
-                return null!;
-            }
 
             return ordersByStatusId;
         }

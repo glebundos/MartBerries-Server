@@ -19,10 +19,6 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         public async Task<List<MoneyTransfer>> Handle(GetAllMoneyTransferQuery request, CancellationToken cancellationToken)
         {
             var moneyTransfers = (List<MoneyTransfer>)await _moneyTransferRepo.GetAllAsync();
-            if (moneyTransfers == null || moneyTransfers.Count == 0)
-            {
-                return null!;
-            }
 
             return moneyTransfers;
         }
