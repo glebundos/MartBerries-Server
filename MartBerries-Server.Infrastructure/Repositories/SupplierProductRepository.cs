@@ -20,7 +20,6 @@ namespace MartBerries_Server.Infrastructure.Repositories
         public override async Task<IReadOnlyList<SupplierProduct>> GetAllAsync()
         {
             return await _serverContext.Set<SupplierProduct>()
-                .Include(x => x.Product)
                 .Include(x => x.Supplier)
                 .ToListAsync();
         }

@@ -11,8 +11,6 @@ namespace MartBerries_Server.Application.Commands
     {
         public string Name { get; set; }
 
-        public Guid SupplierId { get; set; }
-
         public decimal Price { get; set; }
 
         public int Amount { get; set; }

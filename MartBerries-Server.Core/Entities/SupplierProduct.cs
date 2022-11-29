@@ -12,14 +12,12 @@ namespace MartBerries_Server.Core.Entities
 
         public Guid SupplierId { get; set; }
 
-        public Guid ProductId { get; set; }
+        public string Name { get; set; }
 
-        public int Amount { get; set; }
+        public decimal Price { get; set; }
 
 
         // Navigation properties
         public virtual Supplier Supplier { get; set; }
-
-        public virtual Product Product { get; set; }
     }
 }

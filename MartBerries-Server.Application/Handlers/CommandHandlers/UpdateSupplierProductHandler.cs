@@ -26,8 +26,8 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             }
 
             oldSupplierProduct.SupplierId = request.SupplierId;
-            oldSupplierProduct.ProductId = request.ProductId;
-            oldSupplierProduct.Amount = request.Amount;
+            oldSupplierProduct.Name = request.Name;
+            oldSupplierProduct.Price = request.Price;
 
             var newSupplierProduct = await _supplierProductRepo.UpdateAsync(oldSupplierProduct);
             return(newSupplierProduct);

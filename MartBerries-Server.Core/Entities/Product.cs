@@ -18,7 +18,5 @@ namespace MartBerries_Server.Core.Entities
 
         // Navigation property
         public virtual ICollection<OrderedProduct> Orders { get; set; }
-
-        public virtual ICollection<SupplierProduct> Suppliers { get; set; }
     }
 }
