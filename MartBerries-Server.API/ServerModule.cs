@@ -32,6 +32,8 @@ namespace MartBerries_Server.API
                     Version = "v1"
                 });
             });
+
+            services.AddCors();
             services.AddAutoMapper(typeof(Program));
             services.AddMediatR(typeof(GetAllSupplierHandler).GetTypeInfo().Assembly);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
