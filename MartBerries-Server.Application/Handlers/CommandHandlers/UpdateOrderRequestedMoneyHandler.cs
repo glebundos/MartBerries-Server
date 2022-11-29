@@ -22,7 +22,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (oldOrder == null)
             {
-                return null!;
+                throw new InvalidCastException(nameof(request));
             }
 
             oldOrder.RequestedMoney = request.RequestedMoney;

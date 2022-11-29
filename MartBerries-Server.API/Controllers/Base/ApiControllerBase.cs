@@ -24,7 +24,7 @@ namespace MartBerries_Server.API.Controllers.Base
             }
             catch
             {
-                return NotFound();
+                return StatusCode(500);
             }
         }
 
@@ -36,7 +36,7 @@ namespace MartBerries_Server.API.Controllers.Base
             }
             catch
             {
-                return NotFound();
+                return StatusCode(500);
             }
         }
     }

@@ -21,7 +21,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (order == null)
             {
-                return Guid.Empty;
+                throw new KeyNotFoundException();
             }
 
             await _orderRepo.DeleteAsync(order);

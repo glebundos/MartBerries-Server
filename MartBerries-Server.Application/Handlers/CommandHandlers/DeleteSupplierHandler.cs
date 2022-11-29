@@ -21,7 +21,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (supplier == null)
             {
-                return Guid.Empty;
+                throw new KeyNotFoundException();
             }
 
             await _supplierRepo.DeleteAsync(supplier);

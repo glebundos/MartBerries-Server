@@ -22,7 +22,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             var supplierProductEntity = SupplierProductMapper.Mapper.Map<SupplierProduct>(request);
             if  (supplierProductEntity == null)
             {
-                return Guid.Empty;
+                throw new InvalidCastException(nameof(supplierProductEntity));
             }
 
             return (await _supplierProductRepo.AddAsync(supplierProductEntity)).Id;

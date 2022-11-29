@@ -5,6 +5,7 @@ using MartBerries_Server.Core.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             var supplierEntity = SupplierMapper.Mapper.Map<Supplier>(request);
             if (supplierEntity == null)
             {
-                return Guid.Empty;
+                throw new InvalidCastException(nameof(supplierEntity));
             }
 
             return (await _supplierRepository.AddAsync(supplierEntity)).Id;

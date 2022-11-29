@@ -22,7 +22,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (oldProduct == null)
             {
-                return null!;
+                throw new InvalidCastException(nameof(request));
             }
 
             oldProduct.Name = request.Name;

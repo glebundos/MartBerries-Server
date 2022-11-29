@@ -28,7 +28,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (oldOrder == null)
             {
-                return null!;
+                throw new InvalidCastException(nameof(request));
             }
 
             if (request.StatusId == 5)
