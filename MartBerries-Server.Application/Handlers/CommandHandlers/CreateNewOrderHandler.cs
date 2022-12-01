@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Handlers.CommandHandlers
 {
-    public class CreateNewOrderHandler : IRequestHandler<CreateNewOrderCommand, Guid>
+    public class CreateNewOrderHandler : IRequestHandler<CreateNewOrderCommand, Order>
     {
         private readonly IOrderRepository _orderRepo;
 
@@ -23,7 +23,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             _orderedProductRepo = orderedProductRepo;
         }
 
-        public async Task<Guid> Handle(CreateNewOrderCommand request, CancellationToken cancellationToken)
+        public async Task<Order> Handle(CreateNewOrderCommand request, CancellationToken cancellationToken)
         {
             var orderedProducts = OrderedProductMapper.Mapper.Map<List<OrderedProduct>>(request.OrderedProducts);
             var orderEntity = OrderMapper.Mapper.Map<Order>(request);
@@ -32,16 +32,16 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                 throw new InvalidCastException(nameof(orderEntity));
             }
 
-            var createdId = (await _orderRepo.AddAsync(orderEntity)).Id;
+            var createdOrder = await _orderRepo.AddAsync(orderEntity);
 
             for (int i = 0; i < orderedProducts.Count; i++)
             {
-                orderedProducts[i].OrderId = createdId;
+                orderedProducts[i].OrderId = createdOrder.Id;
             }
 
             await _orderedProductRepo.AddRangeAsync(orderedProducts);
 
-            return createdId;
+            return createdOrder;
         }
     }
 }

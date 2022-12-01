@@ -33,7 +33,7 @@ namespace MartBerries_Server.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateNew([FromBody] CreateNewOrderCommand command)
+        public async Task<ActionResult<Order>> CreateNew([FromBody] CreateNewOrderCommand command)
         {
             return await CommandAsync(command);
         }

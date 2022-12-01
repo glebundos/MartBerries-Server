@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Commands
 {
-    public class CreateNewOrderCommand : IRequest<Guid>
+    public class CreateNewOrderCommand : IRequest<Order>
     {
         public DateTime SubmittedDateTime { get; } = DateTime.Now;
 
         public int OrderStatusId { get; } = 0;
+
+        public string CustomerName { get; set; }
+
+        public string CustomerPhoneNumber { get; set; }
+
+        public string CustomerAdditionalInfo { get; set; }
 
         public List<OrderedProductModel> OrderedProducts { get; set; }
 

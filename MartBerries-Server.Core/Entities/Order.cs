@@ -17,6 +17,12 @@ namespace MartBerries_Server.Core.Entities
 
         public decimal RequestedMoney { get; set; }
 
+        public string CustomerName { get; set; }
+
+        public string CustomerPhoneNumber { get; set; }
+
+        public string CustomerAdditionalInfo { get; set; }
+
         [Required]
         public virtual int OrderStatusId
         {
