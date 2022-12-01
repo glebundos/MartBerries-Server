@@ -28,7 +28,7 @@ namespace MartBerries_Server.API
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Employee.API",
+                    Title = "MartBerries.API",
                     Version = "v1"
                 });
             });

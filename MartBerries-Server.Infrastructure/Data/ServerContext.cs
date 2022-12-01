@@ -40,6 +40,8 @@ namespace MartBerries_Server.Infrastructure.Data
                 .WithMany(x => x.Products)
                 .HasForeignKey(x => x.SupplierId)
                 .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Supplier>()
+                .HasMany(x => x.Products);
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
