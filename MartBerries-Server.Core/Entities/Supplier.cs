@@ -11,5 +11,7 @@ namespace MartBerries_Server.Core.Entities
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public virtual ICollection<SupplierProduct> Products { get; set; }
     }
 }
