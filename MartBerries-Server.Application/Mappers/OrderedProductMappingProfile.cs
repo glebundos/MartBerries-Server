@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MartBerries_Server.Application.Responses;
 using MartBerries_Server.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace MartBerries_Server.Application.Mappers
         public OrderedProductMappingProfile()
         {
             CreateMap<OrderedProductModel, OrderedProduct>().ReverseMap();
+            CreateMap<OrderedProduct, OrderedProductResponse>()
+                .ForMember(x => x.Name, m => m.MapFrom(a => a.Product.Name))
+                .ForMember(x => x.Id, m => m.MapFrom(a => a.Id))
+                .ForMember(x => x.Amount, m => m.MapFrom(a => a.Amount));
         }
     }
 }

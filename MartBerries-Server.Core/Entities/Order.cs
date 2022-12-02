@@ -51,6 +51,6 @@ namespace MartBerries_Server.Core.Entities
         }
 
         //
-        public virtual ICollection<OrderedProduct> Products { get; set; }
+        public virtual List<OrderedProduct> Products { get; set; }
     }
 }

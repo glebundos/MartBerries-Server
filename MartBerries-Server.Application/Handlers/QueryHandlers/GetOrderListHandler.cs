@@ -1,4 +1,6 @@
-﻿using MartBerries_Server.Application.Queries;
+﻿using MartBerries_Server.Application.Mappers;
+using MartBerries_Server.Application.Queries;
+using MartBerries_Server.Application.Responses;
 using MartBerries_Server.Core.Entities;
 using MartBerries_Server.Core.Repositories;
 using MediatR;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Handlers.QueryHandlers
 {
-    public class GetOrderListHandler : IRequestHandler<GetOrderListQuery, List<Order>>
+    public class GetOrderListHandler : IRequestHandler<GetOrderListQuery, List<OrderResponse>>
     {
         private IOrderRepository _orderRepo;
 
@@ -18,18 +20,20 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         {
             _orderRepo = orderRepository;
         }
-        public async Task<List<Order>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
+        public async Task<List<OrderResponse>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
         {
             var statusId = request.StatusID;
             if (statusId == -1)
             {
                 var orders = (List<Order>)await _orderRepo.GetAllAsync();
-                return orders;
+                var responses = OrderMapper.Mapper.Map<List<OrderResponse>>(orders);
+
+                return responses;
             }
 
             var ordersByStatusId = (List<Order>)await _orderRepo.GetByStatusIdAsync(statusId);
-
-            return ordersByStatusId;
+            var responsesByStatusId = OrderMapper.Mapper.Map<List<OrderResponse>>(ordersByStatusId);
+            return responsesByStatusId;
         }
     }
 }

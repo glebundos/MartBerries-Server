@@ -1,6 +1,7 @@
 ﻿using MartBerries_Server.API.Controllers.Base;
 using MartBerries_Server.Application.Commands;
 using MartBerries_Server.Application.Queries;
+using MartBerries_Server.Application.Responses;
 using MartBerries_Server.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@ namespace MartBerries_Server.API.Controllers
         public OrderController(IMediator mediator) : base(mediator) { }
 
         [HttpGet]
-        public async Task<ActionResult<List<Order>>> Get()
+        public async Task<ActionResult<List<OrderResponse>>> Get()
         {
             return await QueryAsync(new GetOrderListQuery());
         }
@@ -27,7 +28,7 @@ namespace MartBerries_Server.API.Controllers
         }
 
         [HttpGet("{statusId:int}")]
-        public async Task<ActionResult<List<Order>>> GetByStatusId(int statusId)
+        public async Task<ActionResult<List<OrderResponse>>> GetByStatusId(int statusId)
         {
             return await QueryAsync(new GetOrderListQuery(statusId));
         }

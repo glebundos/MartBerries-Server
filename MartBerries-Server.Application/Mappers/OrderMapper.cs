@@ -15,6 +15,7 @@ namespace MartBerries_Server.Application.Mappers
             {
                 cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
                 cfg.AddProfile<OrderMappingProfile>();
+                cfg.AddProfile<OrderedProductMappingProfile>();
             });
 
             var mapper = config.CreateMapper();
