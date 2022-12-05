@@ -32,7 +32,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                 throw new InvalidCastException(nameof(request));
             }
 
-            oldOrder.SubmittedMoney = request.SubmittedMoney;
+            oldOrder.SubmittedMoney += request.SubmittedMoney;
             var newOrder = await _orderRepo.UpdateAsync(oldOrder);
             var moneyTransfer = new MoneyTransfer
             {
