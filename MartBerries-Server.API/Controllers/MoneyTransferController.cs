@@ -18,5 +18,11 @@ namespace MartBerries_Server.API.Controllers
         {
             return await QueryAsync(new GetAllMoneyTransferQuery());
         }
+
+        [HttpGet("report")]
+        public async Task<ActionResult<bool>> GenerateReport()
+        {
+            return await QueryAsync(new GenerateMoneyReportQuery());
+        }
     }
 }
