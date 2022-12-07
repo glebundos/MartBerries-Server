@@ -23,6 +23,11 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         public async Task<List<OrderResponse>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
         {
             var statusId = request.StatusID;
+            if (statusId < -1 || statusId > 6) 
+            {
+                throw new Exception(statusId.ToString());
+            }
+
             if (statusId == -1)
             {
                 var orders = (List<Order>)await _orderRepo.GetAllAsync();
