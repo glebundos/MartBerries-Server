@@ -7,29 +7,23 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Infrastructure
 {
-    public class MoneyTransferReportGenerator
+    public static class MoneyTransferReportGenerator
     {
-        private TextWriter _writer;
-
-        private string _path;
-
-        public MoneyTransferReportGenerator()
-        {
-            _path = $"Reports/MoneyReport_{DateTime.UtcNow.ToString("MMddyy_HHmm", new System.Globalization.CultureInfo("en-US"))}.csv";
-            _writer = new StreamWriter(_path, false);
+        public static decimal OverallIncome 
+        { 
+            get
+            {
+                return _overallIncome;
+            }
         }
 
-        ~MoneyTransferReportGenerator() => this.Dispose(false);
+        private static string? _moneyTransferReport;
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        private static decimal _overallIncome;
 
-        public string Write(List<MoneyTransfer> records)
+        public static string Generate(List<MoneyTransfer> records)
         {
-            decimal overall = 0;
+            ClearBuf();
             foreach (var record in records ?? throw new ArgumentNullException(nameof(records), "Records can't be null"))
             {
                 if (record is null)
@@ -37,37 +31,33 @@ namespace MartBerries_Server.Infrastructure
                     throw new ArgumentNullException(nameof(record), "Record can't be null");
                 }
 
-                overall += this.Write(record);
+                Write(record);
             }
 
-            this.WriteTotal(overall);
-
-            _writer.Flush();
-            _writer.Dispose();
-
-            return _path;
+            WriteTotal();
+            return _moneyTransferReport ?? string.Empty;
         }
 
-        private decimal Write(MoneyTransfer record)
+        private static void ClearBuf()
         {
-            _writer.WriteLine(
+            _moneyTransferReport = string.Empty;
+            _overallIncome = 0;
+        }
+
+        private static void Write(MoneyTransfer record)
+        {
+            _moneyTransferReport +=
                 $"{record.Id}; " +
                 $"{record.TransferDateTime.ToString("MM/dd/yy HH:mm", new System.Globalization.CultureInfo("en-US"))}; " +
                 $"{record.TransactionType}; " +
-                $"{record.Amount}");
+                $"{record.Amount}\n";
 
-            return record.TransactionType == 0 ? -record.Amount : record.Amount;
+            _overallIncome += record.TransactionType == 0 ? -record.Amount : record.Amount;
         }
 
-        private void WriteTotal(decimal overall)
+        private static void WriteTotal()
         {
-            _writer.WriteLine();
-            _writer.WriteLine("; ; Total Income:;" + overall);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            _writer?.Dispose();
+            _moneyTransferReport += "\n ; ; Total Income:;" + _overallIncome;
         }
     }
 }

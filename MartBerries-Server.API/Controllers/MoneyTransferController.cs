@@ -4,6 +4,7 @@ using MartBerries_Server.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace MartBerries_Server.API.Controllers
 {

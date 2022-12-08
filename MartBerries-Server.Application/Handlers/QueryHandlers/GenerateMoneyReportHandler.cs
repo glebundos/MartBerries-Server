@@ -15,18 +15,12 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
     {
         private readonly IMoneyTransferRepository _moneyTransferRepo;
 
-        private readonly MoneyTransferReportGenerator _moneyTransferReportGenerator;
-
-        public GenerateMoneyReportHandler(IMoneyTransferRepository moneyTransferRepo)
-        {
-            _moneyTransferRepo = moneyTransferRepo;
-            _moneyTransferReportGenerator = new MoneyTransferReportGenerator();
-        }
+        public GenerateMoneyReportHandler(IMoneyTransferRepository moneyTransferRepo) => _moneyTransferRepo = moneyTransferRepo;
 
         public async Task<byte[]> Handle(GenerateMoneyReportQuery request, CancellationToken cancellationToken)
         {
             var moneyTransfers = (List<MoneyTransfer>)await _moneyTransferRepo.GetAllAsync();
-            string path;
+            string reportString;
 
             if (moneyTransfers.Count == 0)
             {
@@ -35,14 +29,14 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
 
             try
             {
-                path = _moneyTransferReportGenerator.Write(moneyTransfers);
+                reportString = MoneyTransferReportGenerator.Generate(moneyTransfers);
             }
             catch (Exception)
             {
                 throw new Exception();
             }
 
-            return File.ReadAllBytes(path);
+            return Encoding.UTF8.GetBytes(reportString);
         }
     }
 }
