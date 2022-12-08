@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Queries
 {
-    public class GenerateMoneyReportQuery : IRequest<bool>
+    public class GenerateMoneyReportQuery : IRequest<byte[]>
     {
 
     }

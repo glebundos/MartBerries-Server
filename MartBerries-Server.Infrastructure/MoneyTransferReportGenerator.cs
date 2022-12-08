@@ -11,9 +11,12 @@ namespace MartBerries_Server.Infrastructure
     {
         private TextWriter _writer;
 
+        private string _path;
+
         public MoneyTransferReportGenerator()
         {
-            _writer = new StreamWriter($"Reports/MoneyReport_{DateTime.UtcNow.ToString("MMddyy_HHmm", new System.Globalization.CultureInfo("en-US"))}.csv", false);
+            _path = $"Reports/MoneyReport_{DateTime.UtcNow.ToString("MMddyy_HHmm", new System.Globalization.CultureInfo("en-US"))}.csv";
+            _writer = new StreamWriter(_path, false);
         }
 
         ~MoneyTransferReportGenerator() => this.Dispose(false);
@@ -24,8 +27,9 @@ namespace MartBerries_Server.Infrastructure
             GC.SuppressFinalize(this);
         }
 
-        public void Write(List<MoneyTransfer> records)
+        public string Write(List<MoneyTransfer> records)
         {
+            decimal overall = 0;
             foreach (var record in records ?? throw new ArgumentNullException(nameof(records), "Records can't be null"))
             {
                 if (record is null)
@@ -33,20 +37,32 @@ namespace MartBerries_Server.Infrastructure
                     throw new ArgumentNullException(nameof(record), "Record can't be null");
                 }
 
-                this.Write(record);
+                overall += this.Write(record);
             }
+
+            this.WriteTotal(overall);
 
             _writer.Flush();
             _writer.Dispose();
+
+            return _path;
         }
 
-        private void Write(MoneyTransfer record)
+        private decimal Write(MoneyTransfer record)
         {
             _writer.WriteLine(
                 $"{record.Id}; " +
                 $"{record.TransferDateTime.ToString("MM/dd/yy HH:mm", new System.Globalization.CultureInfo("en-US"))}; " +
                 $"{record.TransactionType}; " +
                 $"{record.Amount}");
+
+            return record.TransactionType == 0 ? -record.Amount : record.Amount;
+        }
+
+        private void WriteTotal(decimal overall)
+        {
+            _writer.WriteLine();
+            _writer.WriteLine("; ; Total Income:;" + overall);
         }
 
         private void Dispose(bool disposing)

@@ -22,7 +22,8 @@ namespace MartBerries_Server.API.Controllers
         [HttpGet("report")]
         public async Task<ActionResult<bool>> GenerateReport()
         {
-            return await QueryAsync(new GenerateMoneyReportQuery());
+            var bytes = await RawQueryAsync(new GenerateMoneyReportQuery());
+            return File(bytes, "text/csv");
         }
     }
 }

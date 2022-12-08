@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Handlers.QueryHandlers
 {
-    public class GenerateMoneyReportHandler : IRequestHandler<GenerateMoneyReportQuery, bool>
+    public class GenerateMoneyReportHandler : IRequestHandler<GenerateMoneyReportQuery, byte[]>
     {
         private readonly IMoneyTransferRepository _moneyTransferRepo;
 
@@ -23,25 +23,26 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             _moneyTransferReportGenerator = new MoneyTransferReportGenerator();
         }
 
-        public async Task<bool> Handle(GenerateMoneyReportQuery request, CancellationToken cancellationToken)
+        public async Task<byte[]> Handle(GenerateMoneyReportQuery request, CancellationToken cancellationToken)
         {
             var moneyTransfers = (List<MoneyTransfer>)await _moneyTransferRepo.GetAllAsync();
+            string path;
 
             if (moneyTransfers.Count == 0)
             {
-                return false;
+                return null!;
             }
 
             try
             {
-                _moneyTransferReportGenerator.Write(moneyTransfers);
+                path = _moneyTransferReportGenerator.Write(moneyTransfers);
             }
             catch (Exception)
             {
                 throw new Exception();
             }
 
-            return true;
+            return File.ReadAllBytes(path);
         }
     }
 }
