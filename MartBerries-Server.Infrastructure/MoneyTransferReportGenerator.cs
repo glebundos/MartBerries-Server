@@ -24,6 +24,7 @@ namespace MartBerries_Server.Infrastructure
         public static string Generate(List<MoneyTransfer> records)
         {
             ClearBuf();
+            WriteTop();
             foreach (var record in records ?? throw new ArgumentNullException(nameof(records), "Records can't be null"))
             {
                 if (record is null)
@@ -58,6 +59,11 @@ namespace MartBerries_Server.Infrastructure
         private static void WriteTotal()
         {
             _moneyTransferReport += "\n ; ; Total Income:;" + _overallIncome;
+        }
+
+        private static void WriteTop()
+        {
+            _moneyTransferReport += "Id; Transfer date; Transaction Type; Amount\n";
         }
     }
 }
