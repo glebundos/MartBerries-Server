@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MartBerries-Server.Core\MartBerries-Server.Core.csproj" />
+    <ProjectReference Include="..\MartBerries-Server.Infrastructure\MartBerries-Server.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

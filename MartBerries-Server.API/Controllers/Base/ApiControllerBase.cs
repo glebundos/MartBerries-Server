@@ -39,5 +39,17 @@ namespace MartBerries_Server.API.Controllers.Base
                 return StatusCode(500);
             }
         }
+
+        protected async Task<TResult> RawQueryAsync<TResult>(IRequest<TResult> query)
+        {
+            try
+            {
+                return await _mediator.Send(query);
+            }
+            catch
+            {
+                return default(TResult)!;
+            }
+        }
     }
 }

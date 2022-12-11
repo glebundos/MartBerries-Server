@@ -4,6 +4,7 @@ using MartBerries_Server.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace MartBerries_Server.API.Controllers
 {
@@ -17,6 +18,13 @@ namespace MartBerries_Server.API.Controllers
         public async Task<ActionResult<List<MoneyTransfer>>> Get()
         {
             return await QueryAsync(new GetAllMoneyTransferQuery());
+        }
+
+        [HttpGet("report")]
+        public async Task<ActionResult<bool>> GenerateReport()
+        {
+            var bytes = await RawQueryAsync(new GenerateMoneyReportQuery());
+            return File(bytes, "text/csv");
         }
     }
 }
