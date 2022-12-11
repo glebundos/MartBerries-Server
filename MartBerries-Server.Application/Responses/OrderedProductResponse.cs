@@ -13,5 +13,7 @@ namespace MartBerries_Server.Application.Responses
         public int Amount { get; set; }
 
         public string Name { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

@@ -17,8 +17,9 @@ namespace MartBerries_Server.Application.Mappers
             CreateMap<OrderedProductModel, OrderedProduct>().ReverseMap();
             CreateMap<OrderedProduct, OrderedProductResponse>()
                 .ForMember(x => x.Name, m => m.MapFrom(a => a.Product.Name))
-                .ForMember(x => x.Id, m => m.MapFrom(a => a.Id))
-                .ForMember(x => x.Amount, m => m.MapFrom(a => a.Amount));
+                .ForMember(x => x.Id, m => m.MapFrom(a => a.Product.Id))
+                .ForMember(x => x.Amount, m => m.MapFrom(a => a.Amount))
+                .ForMember(x => x.Price, m => m.MapFrom(a => a.Product.Price));
         }
     }
 }
