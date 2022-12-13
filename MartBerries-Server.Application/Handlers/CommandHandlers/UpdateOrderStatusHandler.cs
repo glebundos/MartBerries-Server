@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MartBerries_Server.Core.Entities.Order;
 
 namespace MartBerries_Server.Application.Handlers.CommandHandlers
 {
@@ -34,7 +35,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                 throw new InvalidCastException(nameof(request));
             }
 
-            if (request.StatusId == 4)
+            if (request.StatusId == (int)OrderStatuses.InDelivery)
             {
                 await CreateProductTransferNotes(request);
             }
