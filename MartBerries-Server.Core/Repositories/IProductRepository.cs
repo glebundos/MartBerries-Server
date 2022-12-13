@@ -10,6 +10,6 @@ namespace MartBerries_Server.Core.Repositories
 {
     public interface IProductRepository : IRepository<Product>
     {
-
+        public Task<Product> GetByName(string name);
     }
 }

@@ -14,6 +14,9 @@ namespace MartBerries_Server.Application.Mappers
         public SupplierProductMappingProfile()
         {
             CreateMap<CreateSupplierProductCommand, SupplierProduct>().ReverseMap();
+            CreateMap<SupplierProduct, Product>()
+                .ForMember(x => x.Price, m => m.MapFrom(a => a.Price))
+                .ForMember(x => x.Name, m => m.MapFrom(a => a.Name));
         }
     }
 }

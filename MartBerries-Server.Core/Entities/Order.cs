@@ -42,7 +42,6 @@ namespace MartBerries_Server.Core.Entities
         public enum OrderStatuses
         {
             Created,
-            Approved,
             PaymentPending,
             Paid,
             Assemblying,

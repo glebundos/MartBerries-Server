@@ -25,7 +25,7 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             }
             catch
             {
-                return null!;
+                throw new Exception();
             }
         }
     }

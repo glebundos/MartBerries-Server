@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static MartBerries_Server.Core.Entities.Order;
 
 namespace MartBerries_Server.Application.Handlers.QueryHandlers
 {
@@ -23,7 +24,7 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         public async Task<List<OrderResponse>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
         {
             var statusId = request.StatusID;
-            if (statusId < -1 || statusId > 6) 
+            if (statusId < -1 || statusId > (int)OrderStatuses.Closed) 
             {
                 throw new Exception(statusId.ToString());
             }

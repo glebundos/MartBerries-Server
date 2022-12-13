@@ -14,11 +14,14 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
     {
         private readonly IOrderRepository _orderRepo;
 
+        private readonly IProductRepository _productRepo;
+
         private readonly IProductTransferRepository _productTransferRepo;
 
-        public UpdateOrderStatusHandler(IOrderRepository orderRepository, IProductTransferRepository productTransferRepository)
+        public UpdateOrderStatusHandler(IOrderRepository orderRepository, IProductRepository productRepository, IProductTransferRepository productTransferRepository)
         {
             _orderRepo = orderRepository;
+            _productRepo = productRepository;
             _productTransferRepo = productTransferRepository;
         }
 
@@ -31,7 +34,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                 throw new InvalidCastException(nameof(request));
             }
 
-            if (request.StatusId == 5)
+            if (request.StatusId == 4)
             {
                 await CreateProductTransferNotes(request);
             }
@@ -43,7 +46,8 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
         private async Task CreateProductTransferNotes(UpdateOrderStatusCommand request)
         {
-            var products = (await _orderRepo.GetByIdAsync(request.Id)).Products.Select(x => x.Product);
+            var orderedProducts = (await _orderRepo.GetByIdAsync(request.Id)).Products.ToList();
+            var products = orderedProducts.Select(x => x.Product).ToList();
             var productIds = products.Select(x => x.Id).ToList();
             var productAmounts = products.Select(x => x.Amount).ToList();
 
@@ -57,6 +61,9 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                     Amount = productAmounts[i],
                     TransferType = ProductTransfer.TransferTypes.Export
                 });
+
+                products[i].Amount -= orderedProducts[i].Amount;
+                await _productRepo.UpdateAsync(products[i]);
             }
 
             await _productTransferRepo.AddRangeAsync(productTransfers);

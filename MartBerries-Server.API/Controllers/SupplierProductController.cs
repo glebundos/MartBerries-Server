@@ -37,5 +37,11 @@ namespace MartBerries_Server.API.Controllers
         {
             return await CommandAsync(command);
         }
+
+        [HttpPost("buy")]
+        public async Task<ActionResult<bool>> BuyProduct([FromBody] BuyProductCommand command)
+        {
+            return await CommandAsync(command);
+        }
     }
 }
