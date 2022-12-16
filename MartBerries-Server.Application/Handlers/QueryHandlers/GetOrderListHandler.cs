@@ -21,6 +21,7 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         {
             _orderRepo = orderRepository;
         }
+
         public async Task<List<OrderResponse>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
         {
             var statusId = request.StatusID;

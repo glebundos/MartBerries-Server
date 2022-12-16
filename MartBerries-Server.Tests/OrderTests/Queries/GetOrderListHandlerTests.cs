@@ -1,18 +1,27 @@
 ﻿using MartBerries_Server.Application.Handlers.QueryHandlers;
 using MartBerries_Server.Application.Queries;
 using MartBerries_Server.Application.Responses;
-using MartBerries_Server.Tests.OrderTests.Queries.Base;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using MartBerries_Server.Core.Repositories;
+using MartBerries_Server.Tests.Mocks;
 
 namespace MartBerries_Server.Tests.OrderTests.Queries
 {
-    public class GetOrderListHandlerTests : OrderQueryHandlerBase
+    public class GetOrderListHandlerTests
     {
+        private readonly Mock<IOrderRepository> _mockRepo;
+
+        public GetOrderListHandlerTests()
+        {
+            _mockRepo = MockOrderRepository.GetOrderRepository();
+        }
+
         [Fact]
         public async Task GetAllOrdersTest()
         {
