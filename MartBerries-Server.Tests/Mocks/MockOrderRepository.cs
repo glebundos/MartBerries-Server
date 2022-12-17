@@ -60,13 +60,16 @@ namespace MartBerries_Server.Tests.Mocks
 
             mockRepo.Setup(r => r.GetByStatusIdAsync(It.IsAny<int>())).ReturnsAsync((int statusId) => _orders.Where(x => x.OrderStatusId == statusId).ToList());
 
-            mockRepo.Setup(r => r.AddAsync(It.IsAny<Order>())).ReturnsAsync((Order order) =>
+            mockRepo.Setup(r => r.AddAsync(It.IsAny<Order>())).ReturnsAsync(
+                (Order order) =>
             {
+                order.Id = Guid.NewGuid();
                 _orders.Add(order);
                 return order;
             });
 
-            mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Order>())).ReturnsAsync((Order order) =>
+            mockRepo.Setup(r => r.UpdateAsync(It.IsAny<Order>())).ReturnsAsync(
+                (Order order) =>
             {
                 var index = _orders.FindIndex(f => f.Id == order.Id);
 
@@ -79,7 +82,8 @@ namespace MartBerries_Server.Tests.Mocks
                 return order;
             });
 
-            mockRepo.Setup(r => r.DeleteAsync(It.IsAny<Order>())).Returns((Order order) =>
+            mockRepo.Setup(r => r.DeleteAsync(It.IsAny<Order>())).Returns(
+                (Order order) =>
             {
                 _orders.Remove(order);
                 return Task.FromResult(1);
