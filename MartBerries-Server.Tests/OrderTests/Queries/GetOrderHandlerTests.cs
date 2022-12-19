@@ -34,7 +34,7 @@ public class GetOrderHandlerTests
     [Theory]
     [InlineData("00000000-2c41-4f0f-b6a2-b9f5fc50b7ee")]
     [InlineData("11111111-107e-4b18-8d94-8d1fb164d0ad")]
-    public async Task GetOrderThrowExceptionTest(Guid guid)
+    public async Task GetOrderThrowsExceptionTest(Guid guid)
     {
         var handler = new GetOrderHandler(_mockRepo.Object);
 

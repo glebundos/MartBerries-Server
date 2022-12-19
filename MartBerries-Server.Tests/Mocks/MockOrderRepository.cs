@@ -24,7 +24,31 @@ namespace MartBerries_Server.Tests.Mocks
                     CustomerName = "Ivan",
                     CustomerPhoneNumber = "88005553535",
                     CustomerAdditionalInfo = "Address: Lenina 8, I want contactless delivery.",
-                    OrderStatusId = 0
+                    OrderStatusId = 0,
+                    Products = new List<OrderedProduct>
+                    {
+                        new OrderedProduct
+                        {
+                            Product = new Product
+                            {
+                                Id = Guid.Parse("11111111-10c2-4274-b497-f7ab3635f5a5"),
+                                Amount = 100,
+                                Price = 10000,
+                                Name = "Pomelo"
+                            }
+                        },
+
+                        new OrderedProduct
+                        {
+                            Product = new Product
+                            {
+                                Id = Guid.Parse("11112222-10c2-4274-b497-f7ab3635f5a5"),
+                                Amount = 200,
+                                Price = 20000,
+                                Name = "IPhone 10"
+                            }
+                        }
+                    }
                 },
 
                 new Order
@@ -36,7 +60,31 @@ namespace MartBerries_Server.Tests.Mocks
                     CustomerName = "Boris",
                     CustomerPhoneNumber = "+375293752929",
                     CustomerAdditionalInfo = "Address: Lenina 9.",
-                    OrderStatusId = 3
+                    OrderStatusId = 3,
+                    Products = new List<OrderedProduct>
+                    {
+                        new OrderedProduct
+                        {
+                            Product = new Product
+                            {
+                                Id = Guid.Parse("22221111-10c2-4274-b497-f7ab3635f5a5"),
+                                Amount = 300,
+                                Price = 30000,
+                                Name = "Apple"
+                            }
+                        },
+
+                        new OrderedProduct
+                        {
+                            Product = new Product
+                            {
+                                Id = Guid.Parse("22222222-10c2-4274-b497-f7ab3635f5a5"),
+                                Amount = 400,
+                                Price = 40000,
+                                Name = "Samsung"
+                            }
+                        }
+                    }
                 },
 
                 new Order
@@ -48,7 +96,31 @@ namespace MartBerries_Server.Tests.Mocks
                     CustomerName = "Maks",
                     CustomerPhoneNumber = "+375443334420",
                     CustomerAdditionalInfo = "Address: Kurchatova 8.",
-                    OrderStatusId = 0
+                    OrderStatusId = 0,
+                    Products = new List<OrderedProduct>
+                    {
+                        new OrderedProduct
+                        {
+                            Product = new Product
+                            {
+                                Id = Guid.Parse("33331111-10c2-4274-b497-f7ab3635f5a5"),
+                                Amount = 500,
+                                Price = 50000,
+                                Name = "Banana"
+                            }
+                        },
+
+                        new OrderedProduct
+                        {
+                            Product = new Product
+                            {
+                                Id = Guid.Parse("33332222-10c2-4274-b497-f7ab3635f5a5"),
+                                Amount = 600,
+                                Price = 60000,
+                                Name = "Huawei"
+                            }
+                        }
+                    }
                 }
             };
 

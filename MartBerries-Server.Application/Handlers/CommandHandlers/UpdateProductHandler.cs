@@ -22,7 +22,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (oldProduct == null)
             {
-                throw new InvalidCastException(nameof(request));
+                throw new Exception(message: "Product not found");
             }
 
             oldProduct.Name = request.Name;

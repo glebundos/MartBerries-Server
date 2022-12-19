@@ -21,7 +21,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (order == null)
             {
-                throw new KeyNotFoundException();
+                throw new Exception(message: "Order not found");
             }
 
             await _orderRepo.DeleteAsync(order);

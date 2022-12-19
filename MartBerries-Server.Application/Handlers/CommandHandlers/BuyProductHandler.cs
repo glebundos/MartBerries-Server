@@ -33,7 +33,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (supplierProduct == null)
             {
-                throw new ArgumentException();
+                throw new Exception(message: "Supplier not found");
             }
 
             var oldProduct = await _productRepo.GetByName(supplierProduct.Name);

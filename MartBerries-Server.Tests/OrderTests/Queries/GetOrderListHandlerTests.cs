@@ -47,7 +47,7 @@ namespace MartBerries_Server.Tests.OrderTests.Queries
         }
 
         [Fact]
-        public async Task GetOrdersByInvalidStatusIdTest()
+        public async Task GetOrdersByStatusIdThrowsExceptionTest()
         {
             var handler = new GetOrderListHandler(_mockRepo.Object);
 

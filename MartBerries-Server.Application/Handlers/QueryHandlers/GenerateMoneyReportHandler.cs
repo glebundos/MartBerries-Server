@@ -33,7 +33,7 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             }
             catch (Exception)
             {
-                throw new Exception();
+                throw new Exception(message: "Report generator error");
             }
 
             return Encoding.UTF8.GetBytes(reportString);

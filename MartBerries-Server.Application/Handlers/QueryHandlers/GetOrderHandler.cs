@@ -25,7 +25,7 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             }
             catch
             {
-                throw new Exception();
+                throw new Exception(message: "Order not found");
             }
         }
     }

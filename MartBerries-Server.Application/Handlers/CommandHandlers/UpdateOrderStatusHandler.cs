@@ -32,7 +32,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (oldOrder == null)
             {
-                throw new InvalidCastException(nameof(request));
+                throw new Exception(message: "Order not found");
             }
 
             if (request.StatusId == (int)OrderStatuses.InDelivery)

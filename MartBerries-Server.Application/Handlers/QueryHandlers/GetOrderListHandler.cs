@@ -27,7 +27,7 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             var statusId = request.StatusID;
             if (statusId < -1 || statusId > (int)OrderStatuses.Closed) 
             {
-                throw new Exception(statusId.ToString());
+                throw new Exception(message: $"Invalid status id: {statusId} \nStatus id must be greater or equal 0 and less or equal than {(int)OrderStatuses.Closed}");
             }
 
             if (statusId == -1)

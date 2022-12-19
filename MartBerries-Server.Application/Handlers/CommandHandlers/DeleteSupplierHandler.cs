@@ -21,7 +21,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (supplier == null)
             {
-                throw new KeyNotFoundException();
+                throw new Exception(message: "Supplier not found");
             }
 
             await _supplierRepo.DeleteAsync(supplier);

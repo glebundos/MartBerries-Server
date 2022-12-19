@@ -29,7 +29,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             var orderEntity = OrderMapper.Mapper.Map<Order>(request);
             if (orderEntity == null)
             {
-                throw new InvalidCastException(nameof(orderEntity));
+                throw new Exception(message: "Invalid request");
             }
 
             var createdOrder = await _orderRepo.AddAsync(orderEntity);

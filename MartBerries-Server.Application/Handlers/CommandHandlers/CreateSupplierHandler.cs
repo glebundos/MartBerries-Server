@@ -23,7 +23,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             var supplierEntity = SupplierMapper.Mapper.Map<Supplier>(request);
             if (supplierEntity == null)
             {
-                throw new InvalidCastException(nameof(supplierEntity));
+                throw new Exception(message: "Invalid request");
             }
 
             return (await _supplierRepository.AddAsync(supplierEntity)).Id;

@@ -23,7 +23,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (productEntity == null)
             {
-                throw new InvalidCastException(nameof(productEntity));
+                throw new Exception(message: "Invalid request");
             }
 
             return (await _productRepo.AddAsync(productEntity)).Id;
