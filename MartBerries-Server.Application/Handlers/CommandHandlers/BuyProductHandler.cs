@@ -20,11 +20,15 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
         private readonly IProductTransferRepository _productTransferRepo;
 
-        public BuyProductHandler(IProductRepository productRepo, ISupplierProductRepository supplierProductRepo, IProductTransferRepository productTransferRepository)
+        private readonly IMoneyTransferRepository _moneyTransferRepo;
+
+        public BuyProductHandler(IProductRepository productRepo, ISupplierProductRepository supplierProductRepo,
+                                 IProductTransferRepository productTransferRepository, IMoneyTransferRepository moneyTransferRepository)
         {
             _productRepo = productRepo;
             _supplierProductRepo = supplierProductRepo;
             _productTransferRepo = productTransferRepository;
+            _moneyTransferRepo = moneyTransferRepository;
         }
 
         public async Task<bool> Handle(BuyProductCommand request, CancellationToken cancellationToken)
@@ -47,7 +51,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
                 if (newProduct != null)
                 {
-                    await CreateProductTransferNote(newProduct, request.Amount);
+                    await CreateTransferNotes(newProduct, request.Amount);
                     return true;
                 }
 
@@ -59,7 +63,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (oldProduct != null)
             {
-                await CreateProductTransferNote(oldProduct, request.Amount);
+                await CreateTransferNotes(oldProduct, request.Amount);
                 return true;
             }
 
@@ -67,7 +71,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
         }
 
-        private async Task CreateProductTransferNote(Product product, int orderedAmount)
+        private async Task CreateTransferNotes(Product product, int orderedAmount)
         {
             var productTransfer = new ProductTransfer 
             {
@@ -78,7 +82,18 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             };
 
             await _productTransferRepo.AddAsync(productTransfer);
+
+            var moneyTransfer = new MoneyTransfer
+            {
+                TransferDateTime = DateTime.Now,
+                TransactionType = MoneyTransfer.TransactionTypes.Expense,
+                Amount = product.Price * orderedAmount
+            };
+
+            await _moneyTransferRepo.AddAsync(moneyTransfer);
             return;
         }
+
+
     }
 }
