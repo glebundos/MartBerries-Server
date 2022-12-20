@@ -21,7 +21,9 @@ public class GetAllOrderedProductHandlerTests
     public async Task GetAllOrderedProductTest()
     {
         var handler = new GetAllOrderedProductHandler(_mockOrderedProductRepo.Object);
+
         var response = await handler.Handle(new GetAllOrderedProductQuery(), CancellationToken.None);
+
         Assert.IsType<List<OrderedProduct>>(response);
     }
 }

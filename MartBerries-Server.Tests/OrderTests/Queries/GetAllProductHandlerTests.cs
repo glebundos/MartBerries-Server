@@ -16,6 +16,7 @@ public class GetAllProductHandlerTests
     {
         _mockProductRepo = MockProductRepository.GetProductRepository();
     }
+
     [Fact]
     public async Task GetAllProductTest()
     {
@@ -25,7 +26,7 @@ public class GetAllProductHandlerTests
 
         Assert.IsType<List<Product>>(response);
 
-        Assert.Equal(3, response.Count);
+        Assert.Equal(2, response.Count);
     }
    
 }

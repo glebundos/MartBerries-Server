@@ -16,23 +16,30 @@ public class GenerateMoneyReportHandlerTests
 
     public GenerateMoneyReportHandlerTests()
     {
-        _mockMoneyTransferRepo = MockMoneyTransferRepository.GetMoneyTransferRepos();
+        _mockMoneyTransferRepo = MockMoneyTransferRepository.GetMoneyTransferRepository();
     }
 
     [Fact]
     public async Task GenerateMoneyReportTest()
     {
         var handler = new GenerateMoneyReportHandler(_mockMoneyTransferRepo.Object);
+
         var moneyTransfers = (List<MoneyTransfer>)await _mockMoneyTransferRepo.Object.GetAllAsync();
+
         var response = await handler.Handle(new GenerateMoneyReportQuery(), CancellationToken.None);
+
         string reportString = MoneyTransferReportGenerator.Generate(moneyTransfers);
+
         Assert.IsType<List<MoneyTransfer>>(moneyTransfers);
-        Assert.Equal(Encoding.UTF8.GetBytes(reportString), response );
+
+        Assert.Equal(Encoding.UTF8.GetBytes(reportString), response);
     }
+
     [Fact]
-    public async Task GetGenerateMoneyTransferIdThrowsExceptionTest()
+    public async Task GetGenerateMoneyReportThrowsExceptionTest()
     {
         var handler = new GenerateMoneyReportHandler(_mockMoneyTransferRepo.Object);
+
         var moneyTransfers = (List<MoneyTransfer>)await _mockMoneyTransferRepo.Object.GetAllAsync();
 
         Assert.ThrowsAsync<Exception>(async () => await handler.Handle(new GenerateMoneyReportQuery(), CancellationToken.None));
