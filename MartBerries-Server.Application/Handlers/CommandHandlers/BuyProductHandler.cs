@@ -93,7 +93,5 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             await _moneyTransferRepo.AddAsync(moneyTransfer);
             return;
         }
-
-
     }
 }

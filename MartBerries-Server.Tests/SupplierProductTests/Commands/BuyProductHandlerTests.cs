@@ -20,11 +20,14 @@ namespace MartBerries_Server.Tests.SupplierProductTests.Commands
 
         private readonly Mock<IProductTransferRepository> _mockProductTransferRepo;
 
+        private readonly Mock<IMoneyTransferRepository> _mockMoneyTransferRepo;
+
         public BuyProductHandlerTests()
         {
             _mockProductRepo = MockProductRepository.GetProductRepository();
             _mockSupplierProductRepo = MockSupplierProductRepository.GetSupplierProductRepository();
             _mockProductTransferRepo = MockProductTransferRepository.GetProductTransferRepository();
+            _mockMoneyTransferRepo = MockMoneyTransferRepository.GetMoneyTransferRepository();
         }
 
         [Theory]
@@ -32,15 +35,21 @@ namespace MartBerries_Server.Tests.SupplierProductTests.Commands
         [InlineData("329ddc2b-c964-4e53-ab3a-7693879961f1", 100)]
         public async Task BuyDifferrentProductTest(Guid id, int amount)
         {
-            var handler = new BuyProductHandler(_mockProductRepo.Object, _mockSupplierProductRepo.Object, _mockProductTransferRepo.Object);
+            var handler = new BuyProductHandler(_mockProductRepo.Object, _mockSupplierProductRepo.Object, _mockProductTransferRepo.Object, _mockMoneyTransferRepo.Object);
 
-            var moneyTransfersCountBeforeImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+            var productTransfersCountBeforeImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+
+            var moneyTransfersCountBeforeImport = (await _mockMoneyTransferRepo.Object.GetAllAsync()).Count();
 
             var response = await handler.Handle(new Application.Commands.BuyProductCommand { Id = id, Amount = amount }, CancellationToken.None);
 
-            var moneyTransfersCountAfterImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+            var productTransfersCountAfterImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+
+            var moneyTransfersCountAfterImport = (await _mockMoneyTransferRepo.Object.GetAllAsync()).Count();
 
             Assert.True(response);
+
+            Assert.Equal(productTransfersCountBeforeImport + 1, productTransfersCountAfterImport);
 
             Assert.Equal(moneyTransfersCountBeforeImport + 1, moneyTransfersCountAfterImport);
         }
@@ -49,9 +58,11 @@ namespace MartBerries_Server.Tests.SupplierProductTests.Commands
         [InlineData("853d1fb8-108f-4f6a-a1e8-80c0e9a9f7fb", 10000)]
         public async Task BuyExistingProductTest(Guid id, int amount)
         {
-            var handler = new BuyProductHandler(_mockProductRepo.Object, _mockSupplierProductRepo.Object, _mockProductTransferRepo.Object);
+            var handler = new BuyProductHandler(_mockProductRepo.Object, _mockSupplierProductRepo.Object, _mockProductTransferRepo.Object, _mockMoneyTransferRepo.Object);
 
-            var moneyTransfersCountBeforeImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+            var productTransfersCountBeforeImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+
+            var moneyTransfersCountBeforeImport = (await _mockMoneyTransferRepo.Object.GetAllAsync()).Count();
 
             var productName = (await _mockSupplierProductRepo.Object.GetByIdAsync(id)).Name;
 
@@ -59,11 +70,15 @@ namespace MartBerries_Server.Tests.SupplierProductTests.Commands
 
             var response = await handler.Handle(new Application.Commands.BuyProductCommand { Id = id, Amount = amount }, CancellationToken.None);
 
-            var moneyTransfersCountAfterImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+            var productTransfersCountAfterImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
+
+            var moneyTransfersCountAfterImport = (await _mockMoneyTransferRepo.Object.GetAllAsync()).Count();
 
             var productAmountAfterImport = (await _mockProductRepo.Object.GetByNameAsync(productName)).Amount;
 
             Assert.True(response);
+
+            Assert.Equal(productTransfersCountBeforeImport + 1, productTransfersCountAfterImport);
 
             Assert.Equal(moneyTransfersCountBeforeImport + 1, moneyTransfersCountAfterImport);
 
@@ -76,7 +91,7 @@ namespace MartBerries_Server.Tests.SupplierProductTests.Commands
         [InlineData("00000000-108f-4f6a-a1e8-80c0e9a9f7fb", 10000)]
         public async Task BuyProductThrowsExceptionTest(Guid id, int amount)
         {
-            var handler = new BuyProductHandler(_mockProductRepo.Object, _mockSupplierProductRepo.Object, _mockProductTransferRepo.Object);
+            var handler = new BuyProductHandler(_mockProductRepo.Object, _mockSupplierProductRepo.Object, _mockProductTransferRepo.Object, _mockMoneyTransferRepo.Object);
 
             Assert.ThrowsAsync<Exception>(async () => await handler.Handle(new Application.Commands.BuyProductCommand { Id = id, Amount = amount }, CancellationToken.None));
         }
