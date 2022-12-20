@@ -25,7 +25,7 @@ namespace MartBerries_Server.Tests.Mocks
 
                 new Product
                 {
-                    Id = Guid.Parse("d1678194-74a6-4cae-85f2-0cc6769da83e"),
+                    Id = Guid.Parse("ac5b0a07-b13c-414d-b696-95ed17dfce73"),
                     Name = "Microwave",
                     Price = 10000,
                     Amount = 50
@@ -66,6 +66,8 @@ namespace MartBerries_Server.Tests.Mocks
                     _products.Remove(product);
                     return Task.FromResult(1);
                 });
+
+            mockRepo.Setup(r => r.GetByNameAsync(It.IsAny<string>())).ReturnsAsync((string name) => _products.FirstOrDefault(x => x.Name == name));
 
             return mockRepo;
         }

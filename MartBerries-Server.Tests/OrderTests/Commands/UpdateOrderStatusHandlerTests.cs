@@ -48,7 +48,7 @@ namespace MartBerries_Server.Tests.OrderTests.Commands
         {
             var handler = new UpdateOrderStatusHandler(_mockOrderRepo.Object, _mockProductRepo.Object, _mockProductTransferRepo.Object);
 
-            var response = await handler.Handle(new UpdateOrderStatusCommand { Id = id, StatusId = statusId }, CancellationToken.None);
+            await handler.Handle(new UpdateOrderStatusCommand { Id = id, StatusId = statusId }, CancellationToken.None);
 
             Assert.Equal(4, (await _mockProductTransferRepo.Object.GetAllAsync()).Count);
         }

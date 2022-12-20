@@ -36,7 +36,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                 throw new Exception(message: "Supplier not found");
             }
 
-            var oldProduct = await _productRepo.GetByName(supplierProduct.Name);
+            var oldProduct = await _productRepo.GetByNameAsync(supplierProduct.Name);
 
             if (oldProduct == null)
             {

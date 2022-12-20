@@ -17,7 +17,7 @@ namespace MartBerries_Server.Infrastructure.Repositories
         {
         }
 
-        public async Task<Product> GetByName(string name)
+        public async Task<Product> GetByNameAsync(string name)
         {
             return await _serverContext.Set<Product>()
                 .FirstOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
