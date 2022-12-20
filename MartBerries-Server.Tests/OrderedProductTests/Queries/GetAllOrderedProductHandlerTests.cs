@@ -6,7 +6,7 @@ using MartBerries_Server.Tests.Mocks;
 using Moq;
 using Xunit;
 
-namespace MartBerries_Server.Tests.OrderTests.Queries;
+namespace MartBerries_Server.Tests.OrderedProductTests.Queries;
 
 public class GetAllOrderedProductHandlerTests
 {

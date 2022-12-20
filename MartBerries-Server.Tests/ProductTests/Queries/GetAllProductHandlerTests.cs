@@ -6,7 +6,7 @@ using MartBerries_Server.Tests.Mocks;
 using Moq;
 using Xunit;
 
-namespace MartBerries_Server.Tests.OrderTests.Queries;
+namespace MartBerries_Server.Tests.ProductTests.Queries;
 
 public class GetAllProductHandlerTests
 {
@@ -28,5 +28,5 @@ public class GetAllProductHandlerTests
 
         Assert.Equal(2, response.Count);
     }
-   
+
 }

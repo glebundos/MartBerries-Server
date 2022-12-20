@@ -8,7 +8,7 @@ using MartBerries_Server.Tests.Mocks;
 using Moq;
 using Xunit;
 
-namespace MartBerries_Server.Tests.OrderTests.Queries;
+namespace MartBerries_Server.Tests.MoneyTransferTests.Queries;
 
 public class GenerateMoneyReportHandlerTests
 {
@@ -44,5 +44,5 @@ public class GenerateMoneyReportHandlerTests
 
         Assert.ThrowsAsync<Exception>(async () => await handler.Handle(new GenerateMoneyReportQuery(), CancellationToken.None));
     }
-    
+
 }

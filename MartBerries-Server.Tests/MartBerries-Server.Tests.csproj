@@ -28,4 +28,8 @@
     <ProjectReference Include="..\MartBerries-Server.Core\MartBerries-Server.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SupplierProductTests\Queries\" />
+  </ItemGroup>
+
 </Project>

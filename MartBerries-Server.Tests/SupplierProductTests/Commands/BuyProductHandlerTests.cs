@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace MartBerries_Server.Tests.OrderTests.Commands
+namespace MartBerries_Server.Tests.SupplierProductTests.Commands
 {
     public class BuyProductHandlerTests
     {
@@ -36,7 +36,7 @@ namespace MartBerries_Server.Tests.OrderTests.Commands
 
             var moneyTransfersCountBeforeImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
 
-            var response = await handler.Handle(new Application.Commands.BuyProductCommand { Id = id, Amount = amount}, CancellationToken.None);
+            var response = await handler.Handle(new Application.Commands.BuyProductCommand { Id = id, Amount = amount }, CancellationToken.None);
 
             var moneyTransfersCountAfterImport = (await _mockProductTransferRepo.Object.GetAllAsync()).Count();
 
@@ -78,7 +78,7 @@ namespace MartBerries_Server.Tests.OrderTests.Commands
         {
             var handler = new BuyProductHandler(_mockProductRepo.Object, _mockSupplierProductRepo.Object, _mockProductTransferRepo.Object);
 
-            Assert.ThrowsAsync<System.Exception>(async () => await handler.Handle(new Application.Commands.BuyProductCommand { Id = id, Amount = amount }, CancellationToken.None));
+            Assert.ThrowsAsync<Exception>(async () => await handler.Handle(new Application.Commands.BuyProductCommand { Id = id, Amount = amount }, CancellationToken.None));
         }
     }
 }
