@@ -10,6 +10,6 @@ namespace MartBerries_Server.Core.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-
+        public Task<User> GetByCreds(string username, string password);
     }
 }

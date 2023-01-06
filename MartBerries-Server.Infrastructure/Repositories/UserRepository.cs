@@ -2,6 +2,7 @@
 using MartBerries_Server.Core.Repositories;
 using MartBerries_Server.Infrastructure.Data;
 using MartBerries_Server.Infrastructure.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace MartBerries_Server.Infrastructure.Repositories
     {
         public UserRepository(ServerContext serverContext) : base(serverContext)
         {
+        }
+
+        public async Task<User> GetByCreds(string username, string password)
+        {
+            return await _serverContext.Set<User>()
+                .FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
         }
     }
 }

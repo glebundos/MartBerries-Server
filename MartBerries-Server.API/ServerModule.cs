@@ -1,4 +1,6 @@
-﻿using MartBerries_Server.Application.Handlers.QueryHandlers;
+﻿using MartBerries_Server.Application.Handlers.CommandHandlers;
+using MartBerries_Server.Application.Handlers.QueryHandlers;
+using MartBerries_Server.Application.Helpers;
 using MartBerries_Server.Core.Repositories;
 using MartBerries_Server.Core.Repositories.Base;
 using MartBerries_Server.Infrastructure.Data;
@@ -37,6 +39,8 @@ namespace MartBerries_Server.API
             services.AddAutoMapper(typeof(Program));
             services.AddMediatR(typeof(GetAllSupplierHandler).GetTypeInfo().Assembly);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        
+            //services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
             services.AddTransient<IMoneyTransferRepository, MoneyTransferRepository>();
             services.AddTransient<IOrderedProductRepository, OrderedProductRepository>();
@@ -45,6 +49,7 @@ namespace MartBerries_Server.API
             services.AddTransient<IProductTransferRepository, ProductTransferRepository>();
             services.AddTransient<ISupplierProductRepository, SupplierProductRepository>();
             services.AddTransient<ISupplierRepository, SupplierRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
     }
 }

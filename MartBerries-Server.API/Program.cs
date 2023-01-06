@@ -1,4 +1,5 @@
 using MartBerries_Server.API;
+using MartBerries_Server.Application.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ app.UseCors(builder => builder
     .AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
+
+app.UseMiddleware<JwtMiddleware>();
 
 app.UseHttpsRedirection();
 
