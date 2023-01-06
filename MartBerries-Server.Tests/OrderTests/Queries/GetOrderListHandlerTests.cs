@@ -1,6 +1,6 @@
 ﻿using MartBerries_Server.Application.Handlers.QueryHandlers;
 using MartBerries_Server.Application.Queries;
-using MartBerries_Server.Application.Responses;
+using MartBerries_Server.Application.Models;
 using Moq;
 using System;
 using System.Collections.Generic;

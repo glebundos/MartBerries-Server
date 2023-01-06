@@ -1,7 +1,7 @@
 ﻿using MartBerries_Server.API.Controllers.Base;
 using MartBerries_Server.Application.Commands;
 using MartBerries_Server.Application.Queries;
-using MartBerries_Server.Application.Responses;
+using MartBerries_Server.Application.Models;
 using MartBerries_Server.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;

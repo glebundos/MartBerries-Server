@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static MartBerries_Server.Core.Entities.Order;
 
-namespace MartBerries_Server.Application.Responses
+namespace MartBerries_Server.Application.Models
 {
     public class OrderResponse
     {

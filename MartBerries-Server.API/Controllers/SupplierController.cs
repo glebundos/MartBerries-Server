@@ -18,12 +18,6 @@ namespace MartBerries_Server.API.Controllers
         public async Task<ActionResult<List<Supplier>>> Get()
         {
             return await QueryAsync(new GetAllSupplierQuery());
-
-            /*return await Task.FromResult(new List<Supplier>
-            {
-                new Supplier { Name = "TestSamsung" }
-            });
-            */
         }
 
         [HttpPost]

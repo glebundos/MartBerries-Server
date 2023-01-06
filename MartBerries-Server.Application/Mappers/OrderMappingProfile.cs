@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MartBerries_Server.Application.Commands;
-using MartBerries_Server.Application.Responses;
-using MartBerries_Server.Core.Entities;
+using MartBerries_Server.Application.Models;
+using MartBerries_Server.Core.Entities; 
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -22,6 +22,7 @@ namespace MartBerries_Server.Infrastructure.Data
         public virtual DbSet<ProductTransfer> ProductTransfers { get; set; } = default!;
         public virtual DbSet<Supplier> Suppliers { get; set; } = default!;
         public virtual DbSet<SupplierProduct> SupplierProducts { get; set; } = default!;
+        public virtual DbSet<User> Users { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

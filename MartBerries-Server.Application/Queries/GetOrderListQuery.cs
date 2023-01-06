@@ -1,4 +1,4 @@
-﻿using MartBerries_Server.Application.Responses;
+﻿using MartBerries_Server.Application.Models;
 using MartBerries_Server.Core.Entities;
 using MediatR;
 using System;

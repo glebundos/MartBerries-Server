@@ -1,6 +1,6 @@
 ﻿using MartBerries_Server.Application.Mappers;
 using MartBerries_Server.Application.Queries;
-using MartBerries_Server.Application.Responses;
+using MartBerries_Server.Application.Models;
 using MartBerries_Server.Core.Entities;
 using MartBerries_Server.Core.Repositories;
 using MediatR;
