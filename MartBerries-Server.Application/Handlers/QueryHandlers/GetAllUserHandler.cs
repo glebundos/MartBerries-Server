@@ -1,4 +1,6 @@
-﻿using MartBerries_Server.Application.Queries;
+﻿using MartBerries_Server.Application.Mappers;
+using MartBerries_Server.Application.Models;
+using MartBerries_Server.Application.Queries;
 using MartBerries_Server.Core.Entities;
 using MartBerries_Server.Core.Repositories;
 using MediatR;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Handlers.QueryHandlers
 {
-    public class GetAllUserHandler : IRequestHandler<GetAllUserQuery, List<User>>
+    public class GetAllUserHandler : IRequestHandler<GetAllUserQuery, List<UserResponse>>
     {
         private readonly IUserRepository _userRepo;
 
@@ -19,11 +21,11 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
             _userRepo = userRepo;
         }
 
-        public async Task<List<User>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
+        public async Task<List<UserResponse>> Handle(GetAllUserQuery request, CancellationToken cancellationToken)
         {
             var users = (List<User>)await _userRepo.GetAllAsync();
 
-            return users;
+            return UserMapper.Mapper.Map<List<UserResponse>>(users);
         }
     }
 }

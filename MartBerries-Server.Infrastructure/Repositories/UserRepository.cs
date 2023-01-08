@@ -22,5 +22,11 @@ namespace MartBerries_Server.Infrastructure.Repositories
             return await _serverContext.Set<User>()
                 .FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
         }
+
+        public async Task<User> GetByUsername(string username)
+        {
+            return await _serverContext.Set<User>()
+                .FirstOrDefaultAsync(x => x.Username == username);
+        }
     }
 }

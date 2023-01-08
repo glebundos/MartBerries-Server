@@ -22,9 +22,15 @@ namespace MartBerries_Server.API.Controllers
             return await CommandAsync(command);
         }
 
+        [HttpPost("register")]
+        public async Task<ActionResult<AuthenticateResponse>> Register([FromBody] RegistrateCommand command)
+        {
+            return await CommandAsync(command);
+        }
+
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<List<User>>> Get()
+        public async Task<ActionResult<List<UserResponse>>> Get()
         {
             return await QueryAsync(new GetAllUserQuery());
         }
