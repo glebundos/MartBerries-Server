@@ -31,14 +31,14 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
         public async Task<AuthenticateResponse> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
         {
             var user = await _userRepo.GetByUsername(request.Username);
-            if (!VerifyHashedPassword(user.Password, request.Password))
-            {
-                return null!;
-            }
-
             if (user == null)
             {
-                return null!;
+                throw new Exception(message: "No such user");
+            }
+
+            if (!VerifyHashedPassword(user.Password, request.Password))
+            {
+                throw new Exception(message: "Wrong password");
             }
 
             var token = _tokenService.GenerateJwtToken(user);

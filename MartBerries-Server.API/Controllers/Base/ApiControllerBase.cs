@@ -22,9 +22,9 @@ namespace MartBerries_Server.API.Controllers.Base
             {
                 return Ok(await _mediator.Send(query));
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500);
+                return new JsonResult(new { message = ex.Message }) { StatusCode = StatusCodes.Status500InternalServerError };
             }
         }
 
@@ -34,9 +34,9 @@ namespace MartBerries_Server.API.Controllers.Base
             {
                 return Ok(await _mediator.Send(command));
             }
-            catch
+            catch (Exception ex)
             {
-                return StatusCode(500);
+                return new JsonResult(new { message = ex.Message }) { StatusCode = StatusCodes.Status500InternalServerError };
             }
         }
 
