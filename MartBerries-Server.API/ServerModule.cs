@@ -50,6 +50,7 @@ namespace MartBerries_Server.API
             services.AddTransient<ISupplierProductRepository, SupplierProductRepository>();
             services.AddTransient<ISupplierRepository, SupplierRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ITokenService, TokenService>();
         }
     }
 }

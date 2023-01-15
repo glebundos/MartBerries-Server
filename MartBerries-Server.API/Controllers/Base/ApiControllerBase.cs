@@ -48,7 +48,7 @@ namespace MartBerries_Server.API.Controllers.Base
             }
             catch
             {
-                return default(TResult)!;
+                return default!;
             }
         }
     }

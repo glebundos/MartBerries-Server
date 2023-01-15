@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace MartBerries_Server.Application.Helpers
 {
-    public static class JwtTokenGenerator
+    public class TokenService : ITokenService
     {
         private static readonly string _secret = "mysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecret";
 
-        public static string generateJwtToken(User user)
+        public string GenerateJwtToken(User user)
         {
             // generate token that is valid for 1 day
             var tokenHandler = new JwtSecurityTokenHandler();

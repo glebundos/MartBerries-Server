@@ -20,9 +20,12 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
     {
         private readonly IUserRepository _userRepo;
 
-        public AuthenticateHandler(IUserRepository userRepo)
+        private readonly ITokenService _tokenService;
+
+        public AuthenticateHandler(IUserRepository userRepo, ITokenService tokenService)
         {
             _userRepo = userRepo;
+            _tokenService = tokenService;
         }
 
         public async Task<AuthenticateResponse> Handle(AuthenticateCommand request, CancellationToken cancellationToken)
@@ -38,7 +41,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
                 return null!;
             }
 
-            var token = JwtTokenGenerator.generateJwtToken(user);
+            var token = _tokenService.GenerateJwtToken(user);
 
             return new AuthenticateResponse(user, token);
         }
