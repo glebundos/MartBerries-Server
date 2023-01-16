@@ -12,7 +12,12 @@ namespace MartBerries_Server.Application.Helpers
 {
     public class TokenService : ITokenService
     {
-        private static readonly string _secret = "mysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecret";
+        private readonly string _secret;
+
+        public TokenService(AppSettings appSettings)
+        {
+            _secret = appSettings.Secret;
+        }
 
         public string GenerateJwtToken(User user)
         {

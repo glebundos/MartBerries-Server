@@ -15,11 +15,12 @@ namespace MartBerries_Server.Application.Helpers
     {
         private readonly RequestDelegate _next;
 
-        private readonly string _secret = "mysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecretmysecret";
+        private readonly string _secret;
 
-        public JwtMiddleware(RequestDelegate next)
+        public JwtMiddleware(RequestDelegate next, AppSettings appSettings)
         {
             _next = next;
+            _secret = appSettings.Secret;
         }
 
         public async Task Invoke(HttpContext context, IUserRepository userRepository)

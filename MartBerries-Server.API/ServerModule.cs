@@ -51,6 +51,10 @@ namespace MartBerries_Server.API
             services.AddTransient<ISupplierRepository, SupplierRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITokenService, TokenService>();
+
+            AppSettings appSettings = new AppSettings();
+            builder.Configuration.GetSection("AppSettings").Bind(appSettings);
+            services.AddSingleton<AppSettings>(appSettings);
         }
     }
 }
