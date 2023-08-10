@@ -51,7 +51,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
                 if (newProduct != null)
                 {
-                    await CreateTransferNotes(newProduct, request.Amount);
+                    await CreateTransferNotes(newProduct, request.Amount, supplierProduct.Price);
                     return true;
                 }
 
@@ -63,7 +63,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
             if (oldProduct != null)
             {
-                await CreateTransferNotes(oldProduct, request.Amount);
+                await CreateTransferNotes(oldProduct, request.Amount, supplierProduct.Price);
                 return true;
             }
 
@@ -71,7 +71,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
 
         }
 
-        private async Task CreateTransferNotes(Product product, int orderedAmount)
+        private async Task CreateTransferNotes(Product product, int orderedAmount, decimal price)
         {
             var productTransfer = new ProductTransfer 
             {
@@ -87,7 +87,7 @@ namespace MartBerries_Server.Application.Handlers.CommandHandlers
             {
                 TransferDateTime = DateTime.Now,
                 TransactionType = MoneyTransfer.TransactionTypes.Expense,
-                Amount = product.Price * orderedAmount
+                Amount = price * orderedAmount
             };
 
             await _moneyTransferRepo.AddAsync(moneyTransfer);

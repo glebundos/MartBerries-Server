@@ -32,8 +32,4 @@
     <ProjectReference Include="..\MartBerries-Server.Infrastructure\MartBerries-Server.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Reports\" />
-  </ItemGroup>
-
 </Project>

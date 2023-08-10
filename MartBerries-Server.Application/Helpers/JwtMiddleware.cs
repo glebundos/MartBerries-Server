@@ -28,12 +28,12 @@ namespace MartBerries_Server.Application.Helpers
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                await attachUserToContext(context, userRepository, token);
+                await AttachUserToContext(context, userRepository, token);
 
             await _next(context);
         }
 
-        private async Task attachUserToContext(HttpContext context, IUserRepository userRepository, string token)
+        private async Task AttachUserToContext(HttpContext context, IUserRepository userRepository, string token)
         {
             try
             {

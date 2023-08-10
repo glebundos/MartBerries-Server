@@ -54,7 +54,7 @@ namespace MartBerries_Server.API
 
             AppSettings appSettings = new AppSettings();
             builder.Configuration.GetSection("AppSettings").Bind(appSettings);
-            services.AddSingleton<AppSettings>(appSettings);
+            services.AddSingleton(appSettings);
         }
     }
 }
