@@ -39,7 +39,8 @@ namespace MartBerries_Server.Core.Entities
             Accountant,
             Stockman,
             SupplierManager,
-            Delivery
+            Delivery,
+            Admin
         }
     }
 }

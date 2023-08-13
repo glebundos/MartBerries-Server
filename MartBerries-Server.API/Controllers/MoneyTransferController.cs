@@ -1,4 +1,5 @@
 ﻿using MartBerries_Server.API.Controllers.Base;
+using MartBerries_Server.Application.Helpers;
 using MartBerries_Server.Application.Queries;
 using MartBerries_Server.Core.Entities;
 using MediatR;
@@ -14,12 +15,14 @@ namespace MartBerries_Server.API.Controllers
     {
         public MoneyTransferController(IMediator mediator) : base(mediator) { }
 
+        [Authorize(2)]
         [HttpGet]
         public async Task<ActionResult<List<MoneyTransfer>>> Get()
         {
             return await QueryAsync(new GetAllMoneyTransferQuery());
         }
 
+        [Authorize(2)]
         [HttpGet("report")]
         public async Task<ActionResult<bool>> GenerateReport()
         {

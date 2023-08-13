@@ -1,5 +1,6 @@
 ﻿using MartBerries_Server.API.Controllers.Base;
 using MartBerries_Server.Application.Commands;
+using MartBerries_Server.Application.Helpers;
 using MartBerries_Server.Application.Queries;
 using MartBerries_Server.Core.Entities;
 using MediatR;
@@ -38,6 +39,7 @@ namespace MartBerries_Server.API.Controllers
             return await CommandAsync(command);
         }
 
+        [Authorize(4)]
         [HttpPost("buy")]
         public async Task<ActionResult<bool>> BuyProduct([FromBody] BuyProductCommand command)
         {
