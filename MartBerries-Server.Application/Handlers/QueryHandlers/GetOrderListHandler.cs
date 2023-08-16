@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static MartBerries_Server.Core.Entities.Order;
+using MartBerries_Server.Application.Helpers.Exceptions;
 
 namespace MartBerries_Server.Application.Handlers.QueryHandlers
 {
@@ -25,6 +26,26 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
         public async Task<List<OrderResponse>> Handle(GetOrderListQuery request, CancellationToken cancellationToken)
         {
             var statusId = request.StatusID;
+            var roleId = request.RoleID;
+
+            if (roleId != 6)
+            {
+                if ((statusId == 1 || statusId == 2) && (roleId != 2))
+                {
+                    throw new RightsException(message: "Incorrect role");
+                }
+
+                if (statusId == 3 && roleId != 3 && roleId != 4)
+                {
+                    throw new RightsException(message: "Incorrect role");
+                }
+
+                if (statusId == 4 && roleId != 5)
+                {
+                    throw new RightsException(message: "Incorrect role");
+                }
+            }
+
             if (statusId < -1 || statusId > (int)OrderStatuses.Closed) 
             {
                 throw new Exception(message: $"Invalid status id: {statusId} \nStatus id must be greater or equal 0 and less or equal than {(int)OrderStatuses.Closed}");

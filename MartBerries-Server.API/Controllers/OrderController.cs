@@ -20,7 +20,9 @@ namespace MartBerries_Server.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<OrderResponse>>> Get()
         {
-            return await QueryAsync(new GetOrderListQuery());
+            var user = (User)HttpContext.Items.FirstOrDefault(x => x.Key.ToString() == "User").Value;
+            var roleId = user.UserRoleId;
+            return await QueryAsync(new GetOrderListQuery(roleId));
         }
 
         [Authorize(0)]
@@ -34,7 +36,9 @@ namespace MartBerries_Server.API.Controllers
         [HttpGet("{statusId:int}")]
         public async Task<ActionResult<List<OrderResponse>>> GetByStatusId(int statusId)
         {
-            return await QueryAsync(new GetOrderListQuery(statusId));
+            var user = (User)HttpContext.Items.FirstOrDefault(x => x.Key.ToString() == "User").Value;
+            var roleId = user.UserRoleId;
+            return await QueryAsync(new GetOrderListQuery(statusId, roleId));
         }
 
         [Authorize(0)]

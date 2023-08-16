@@ -11,16 +11,20 @@ namespace MartBerries_Server.Application.Queries
 {
     public class GetOrderListQuery : IRequest<List<OrderResponse>>
     {
-        public GetOrderListQuery(int statusID)
+        public GetOrderListQuery(int statusID, int roleID)
         {
             StatusID = statusID;
+            RoleID = roleID;
         }
 
-        public GetOrderListQuery()
+        public GetOrderListQuery(int roleID)
         {
             StatusID = -1;
+            RoleID = roleID;
         }
 
         public int StatusID { get; }
+
+        public int RoleID { get; }
     }
 }

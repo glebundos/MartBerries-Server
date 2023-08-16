@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using MartBerries_Server.Application.Helpers.Exceptions;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -21,6 +22,10 @@ namespace MartBerries_Server.API.Controllers.Base
             try
             {
                 return Ok(await _mediator.Send(query));
+            }
+            catch (RightsException ex)
+            {
+                return new JsonResult(new { message = ex.Message }) { StatusCode = 452 };
             }
             catch (Exception ex)
             {

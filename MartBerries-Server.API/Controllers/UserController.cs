@@ -16,7 +16,7 @@ namespace MartBerries_Server.API.Controllers
     {
         public UserController(IMediator mediator) : base(mediator) { }
 
-        [HttpPost("authenticate")]
+        [HttpPost("authorize")]
         public async Task<ActionResult<AuthenticateResponse>> Authenticate([FromBody] AuthenticateCommand command)
         {
             return await CommandAsync(command);
