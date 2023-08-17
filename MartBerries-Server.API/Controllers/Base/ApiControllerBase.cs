@@ -1,4 +1,5 @@
-﻿using MartBerries_Server.Application.Helpers.Exceptions;
+﻿using MartBerries_Server.Application.Helpers;
+using MartBerries_Server.Application.Helpers.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace MartBerries_Server.API.Controllers.Base
             }
             catch (RightsException ex)
             {
-                return new JsonResult(new { message = ex.Message }) { StatusCode = 452 };
+                return new JsonResult(new { message = ex.Message }) { StatusCode = CustomStatusCodes.Status452NotEnoughRights };
             }
             catch (Exception ex)
             {
@@ -38,6 +39,10 @@ namespace MartBerries_Server.API.Controllers.Base
             try
             {
                 return Ok(await _mediator.Send(command));
+            }
+            catch (RightsException ex)
+            {
+                return new JsonResult(new { message = ex.Message }) { StatusCode = CustomStatusCodes.Status452NotEnoughRights };
             }
             catch (Exception ex)
             {

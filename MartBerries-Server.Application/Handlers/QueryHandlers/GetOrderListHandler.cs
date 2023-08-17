@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static MartBerries_Server.Core.Entities.Order;
+using static MartBerries_Server.Core.Entities.User;
 using MartBerries_Server.Application.Helpers.Exceptions;
 
 namespace MartBerries_Server.Application.Handlers.QueryHandlers
@@ -30,17 +31,17 @@ namespace MartBerries_Server.Application.Handlers.QueryHandlers
 
             if (roleId != 6)
             {
-                if ((statusId == 1 || statusId == 2) && (roleId != 2))
+                if ((statusId == 1 || statusId == 2) && (roleId != (int)UserRoles.Accountant))
                 {
                     throw new RightsException(message: "Incorrect role");
                 }
 
-                if (statusId == 3 && roleId != 3 && roleId != 4)
+                if (statusId == 3 && roleId != (int)UserRoles.Stockman && roleId != (int)UserRoles.SupplierManager)
                 {
                     throw new RightsException(message: "Incorrect role");
                 }
 
-                if (statusId == 4 && roleId != 5)
+                if (statusId == 4 && roleId != (int)UserRoles.Delivery)
                 {
                     throw new RightsException(message: "Incorrect role");
                 }

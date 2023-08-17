@@ -5,6 +5,7 @@ using MartBerries_Server.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static MartBerries_Server.Core.Entities.User;
 
 namespace MartBerries_Server.API.Controllers
 {
@@ -14,7 +15,7 @@ namespace MartBerries_Server.API.Controllers
     {
         public ProductTransferController(IMediator mediator) : base(mediator) { }
 
-        [Authorize(4)]
+        [Authorize((int)UserRoles.SupplierManager)]
         [HttpGet]
         public async Task<ActionResult<List<ProductTransfer>>> Get()
         {

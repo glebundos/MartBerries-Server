@@ -13,5 +13,7 @@ namespace MartBerries_Server.Application.Commands
         public Guid Id { get; set; }
 
         public int StatusId { get; set; }
+
+        public int RoleId {  get; set; }
     }
 }

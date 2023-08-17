@@ -6,6 +6,7 @@ using MartBerries_Server.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static MartBerries_Server.Core.Entities.User;
 
 namespace MartBerries_Server.API.Controllers
 {
@@ -15,7 +16,7 @@ namespace MartBerries_Server.API.Controllers
     {
         public ProductController(IMediator mediator) : base(mediator) { }
 
-        [Authorize(6)]
+        [Authorize((int)UserRoles.Admin)]
         [HttpPost]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateProductCommand command)
         {
@@ -29,14 +30,14 @@ namespace MartBerries_Server.API.Controllers
             return await QueryAsync(new GetAllProductQuery());
         }
 
-        [Authorize(6)]
+        [Authorize((int)UserRoles.Admin)]
         [HttpDelete]
         public async Task<ActionResult<Guid>> Delete([FromBody] DeleteProductCommand command)
         {
             return await CommandAsync(command);
         }
 
-        [Authorize(6)]
+        [Authorize((int)UserRoles.Admin)]
         [HttpPut]
         public async Task<ActionResult<Product>> Update([FromBody] UpdateProductCommand command)
         {

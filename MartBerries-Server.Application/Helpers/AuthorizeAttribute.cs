@@ -44,7 +44,7 @@ namespace MartBerries_Server.Application.Helpers
                 else 
                 {
                     // wrong role
-                    context.Result = new JsonResult(new { message = "Not enough rights" }) { StatusCode = StatusCodes.Status406NotAcceptable };
+                    context.Result = new JsonResult(new { message = "Not enough rights" }) { StatusCode = CustomStatusCodes.Status452NotEnoughRights };
                 }
             }
         }

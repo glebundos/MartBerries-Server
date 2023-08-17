@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using static MartBerries_Server.Core.Entities.User;
 
 namespace MartBerries_Server.API.Controllers
 {
@@ -15,14 +16,14 @@ namespace MartBerries_Server.API.Controllers
     {
         public MoneyTransferController(IMediator mediator) : base(mediator) { }
 
-        [Authorize(2)]
+        [Authorize((int)UserRoles.Accountant)]
         [HttpGet]
         public async Task<ActionResult<List<MoneyTransfer>>> Get()
         {
             return await QueryAsync(new GetAllMoneyTransferQuery());
         }
 
-        [Authorize(2)]
+        [Authorize((int)UserRoles.Accountant)]
         [HttpGet("report")]
         public async Task<ActionResult<bool>> GenerateReport()
         {
